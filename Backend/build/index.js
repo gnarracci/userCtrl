@@ -6,8 +6,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const morgan_1 = __importDefault(require("morgan"));
 const cors_1 = __importDefault(require("cors"));
+const session = require('express-session');
+const passport = require('passport');
 const indexRoutes_1 = __importDefault(require("./routes/indexRoutes"));
 const userRoutes_1 = __importDefault(require("./routes/userRoutes"));
+require('./passport/passport');
 class Server {
     constructor() {
         this.app = express_1.default();
@@ -20,6 +23,8 @@ class Server {
         this.app.use(cors_1.default());
         this.app.use(express_1.default.json());
         this.app.use(express_1.default.urlencoded({ extended: false }));
+        this.app.use(passport.initialize());
+        this.app.use(passport.session());
     }
     routes() {
         this.app.use('/', indexRoutes_1.default);

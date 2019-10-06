@@ -1,0 +1,15 @@
+<div class="col-md-4 mt-3" *ngFor="let user of users">
+  <div class="card text-center">
+    <div class="card-header bg-dark text-white d-flex justify-content-between align-items-md-start">
+      {{ user.username }}
+      <button class="btn-danger" (click)="deleteUser(user.id)"><i class="fa fa-trash"></i></button>
+    </div>
+    <img [src]="user.image" class="card-img-top mt-2">
+    <div class="card-body">
+      <p> {{ user.description }} </p>
+      <p> {{ user.role }} </p>
+      <p> {{ user.created_at | date: 'yyyy-MM-dd' }} </p>
+      <a [routerLink]="['/user/edit', user.id]" class="btn btn-primary btn-block"><i class="fa fa-pencil"></i> Edit User</a>
+    </div>
+  </div>
+</div>

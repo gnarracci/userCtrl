@@ -1,4 +1,5 @@
 import { Router } from 'express';
+import { userController } from '../controllers/userControllers';
 
 class UserRoutes {
 
@@ -9,7 +10,11 @@ class UserRoutes {
     }
 
     config(): void{
-        this.router.get('/', (req, res) => res.send('UserOps'));
+        this.router.get('/', userController.list);
+        this.router.get('/:id', userController.getOne);
+        this.router.post('/', userController.create);
+        this.router.put('/:id', userController.update);
+        this.router.delete('/:id', userController.delete);
     }
 }
 

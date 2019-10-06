@@ -1,9 +1,13 @@
 import express, { Application } from 'express'
 import morgan from 'morgan';
 import cors from 'cors';
+const session = require('express-session');
+const passport = require('passport');
 
 import indexRoutes from './routes/indexRoutes';
 import userRoutes from './routes/userRoutes';
+
+require('./passport/passport');
 
 class Server {
 
@@ -21,6 +25,8 @@ class Server {
         this.app.use(cors());
         this.app.use(express.json());
         this.app.use(express.urlencoded({extended: false}));
+        this.app.use(passport.initialize());
+        this.app.use(passport.session());
     }
 
     routes(): void {
