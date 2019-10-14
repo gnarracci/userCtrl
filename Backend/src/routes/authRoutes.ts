@@ -1,8 +1,6 @@
 import { Router } from 'express';
 import { AuthController } from './../controllers/authController';
 
-const passport = require('../passport/passport');
-
 class AuthRoutes {
 
     public router: Router = Router();
@@ -12,7 +10,8 @@ class AuthRoutes {
     }
 
     config(): void{
-        this.router.post('/login', AuthController.login );
+        this.router.get('/', AuthController.info);
+        this.router.post('/', AuthController.login);
     }
 }
 

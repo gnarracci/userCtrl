@@ -24,15 +24,13 @@ export class RegisterComponent implements OnInit {
 
   constructor(private authService: AuthService, private router: Router) { }
 
-  public roleUser = 'USER';
-
   ngOnInit() {
   }
 
   saveNewUser() {
     console.log(this.user);
     delete this.user.created_at;
-    this.authService.saveUser(this.user).subscribe(
+    this.authService.registerUser(this.user).subscribe(
       res => {
         console.log(res);
         this.router.navigate(['/login']);

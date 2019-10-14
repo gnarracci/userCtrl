@@ -2,12 +2,18 @@ import express, { Application } from 'express'
 import morgan from 'morgan';
 import cors from 'cors';
 const session = require('express-session');
+const MySQLStore = require('express-mysql-session') (session);
 const passport = require('passport');
+
+const { database } = require('./keys');
 
 import indexRoutes from './routes/indexRoutes';
 import userRoutes from './routes/userRoutes';
+import authRoutes from './routes/authRoutes';
+import registerRoutes from './routes/registerRoutes';
 
-require('./passport/passport');
+
+const sessionStore = new MySQLStore(database);
 
 class Server {
 
@@ -21,6 +27,13 @@ class Server {
 
     config(): void {
         this.app.set('port', process.env.PORT || 3000);
+        this.app.use(session({
+            key: 'user_session_stored',
+            secret: 'user_session_secret',
+            store: sessionStore,
+            resave: false,
+            saveUninitialized: false
+        }));
         this.app.use(morgan('dev'));
         this.app.use(cors());
         this.app.use(express.json());
@@ -32,6 +45,8 @@ class Server {
     routes(): void {
         this.app.use('/', indexRoutes);
         this.app.use('/api/users', userRoutes);
+        this.app.use('/api/auth/login', authRoutes);
+        this.app.use('/api/auth/register', registerRoutes);
     }
 
     start(): void {

@@ -32,4 +32,12 @@ export class AuthService {
     deleteUser(id: string) {
       return this.http.delete(`${this.API_URI}/users/${id}`);
     }
+
+    registerUser(user: User) {
+      return this.http.post(`${this.API_URI}/auth/register`, user);
+    }
+
+    loginUser(user: User): Observable<User> {
+      return this.http.post(`${this.API_URI}/auth/login`, user);
+    }
 }
