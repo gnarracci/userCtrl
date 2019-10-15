@@ -1,7 +1,8 @@
 import { Request, Response} from 'express';
 import pool from '../database';
+import { User } from '../models/users';
 const bcrypt = require('bcryptjs');
-const passport = require('passport');
+import passport from 'passport';
 
 class AuthControllers {
 
@@ -10,10 +11,8 @@ class AuthControllers {
     }
 
     public login (req: Request, res: Response) {
-
-
-
-        console.log(req.body);
+        passport.authenticate('local')
+        //console.log(req.body);
         res.json({ message: 'Server Data Received!'});
     }
 }

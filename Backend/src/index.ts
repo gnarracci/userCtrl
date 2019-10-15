@@ -1,9 +1,9 @@
 import express, { Application } from 'express'
 import morgan from 'morgan';
 import cors from 'cors';
+import passport from 'passport';
 const session = require('express-session');
 const MySQLStore = require('express-mysql-session') (session);
-const passport = require('passport');
 
 const { database } = require('./keys');
 
@@ -12,8 +12,9 @@ import userRoutes from './routes/userRoutes';
 import authRoutes from './routes/authRoutes';
 import registerRoutes from './routes/registerRoutes';
 
-
 const sessionStore = new MySQLStore(database);
+
+require('./passport-config');
 
 class Server {
 
