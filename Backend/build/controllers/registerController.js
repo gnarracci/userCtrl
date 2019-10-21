@@ -12,8 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const database_1 = __importDefault(require("../database"));
-const bcrypt = require('bcryptjs');
-const passport = require('passport');
+const bcryptjs = require('bcryptjs');
 class RegisterControllers {
     info(req, res) {
         res.json({ text: 'API Register Routes Works!!!' });
@@ -26,3 +25,4 @@ class RegisterControllers {
     }
 }
 exports.RegisterController = new RegisterControllers();
+exports.default = RegisterControllers;

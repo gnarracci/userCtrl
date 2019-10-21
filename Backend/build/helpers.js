@@ -8,15 +8,25 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-class AuthControllers {
-    info(req, res) {
-        res.json({ text: 'API Login Routes Works!!!' });
+const bcryptjs = require('bcryptjs');
+class HashUser {
+    encryptPassword(req, res) {
+        (password) => __awaiter(this, void 0, void 0, function* () {
+            const salt = yield bcryptjs.genSalt(10);
+            const hash = yield bcryptjs.hash(password, salt);
+            return hash;
+        });
     }
-    login(req, res, info) {
-        return __awaiter(this, void 0, void 0, function* () {
-            //console.log('Datos Recibidos en el Back:', req.body);
+    matchPassword() {
+        (password, savedPassword) => __awaiter(this, void 0, void 0, function* () {
+            try {
+                yield bcryptjs.compare(password, savedPassword);
+            }
+            catch (e) {
+                console.log(e);
+            }
         });
     }
 }
-exports.AuthController = new AuthControllers();
-exports.default = AuthControllers;
+exports.hashUser = new HashUser();
+exports.default = HashUser;

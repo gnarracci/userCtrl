@@ -1,8 +1,5 @@
-import { Request, Response} from 'express';
+import { Request, Response } from 'express';
 import pool from '../database';
-import { User } from '../models/users';
-const bcrypt = require('bcryptjs');
-import passport from 'passport';
 
 class AuthControllers {
 
@@ -10,11 +7,11 @@ class AuthControllers {
         res.json({ text: 'API Login Routes Works!!!' });
     }
 
-    public login (req: Request, res: Response) {
-        passport.authenticate('local')
-        //console.log(req.body);
-        res.json({ message: 'Server Data Received!'});
+    public async login (req: Request, res: Response, info: any) {
+        //console.log('Datos Recibidos en el Back:', req.body);
     }
 }
 
 export const AuthController = new AuthControllers();
+
+export default AuthControllers;

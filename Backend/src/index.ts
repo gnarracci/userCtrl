@@ -1,7 +1,6 @@
 import express, { Application } from 'express'
 import morgan from 'morgan';
 import cors from 'cors';
-import passport from 'passport';
 const session = require('express-session');
 const MySQLStore = require('express-mysql-session') (session);
 
@@ -13,8 +12,6 @@ import authRoutes from './routes/authRoutes';
 import registerRoutes from './routes/registerRoutes';
 
 const sessionStore = new MySQLStore(database);
-
-require('./passport-config');
 
 class Server {
 
@@ -39,8 +36,6 @@ class Server {
         this.app.use(cors());
         this.app.use(express.json());
         this.app.use(express.urlencoded({extended: false}));
-        this.app.use(passport.initialize());
-        this.app.use(passport.session());
     }
 
     routes(): void {

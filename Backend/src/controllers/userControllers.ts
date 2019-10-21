@@ -1,6 +1,6 @@
 import { Request, Response} from 'express';
 import pool from '../database';
-const bcrypt = require('bcryptjs');
+import helpers from '../helpers';
 
 class UserControllers {
 
@@ -19,8 +19,14 @@ class UserControllers {
     }
 
     public async create (req: Request, res: Response) {
-        await pool.query('INSERT INTO users set ?', [req.body]);
-        res.json({message: 'User Saved!'});
+        const newUser = {
+            username: req.body.username,
+            password: req.body.password,
+            email: req.body.email
+        }
+        res.json(newUser);
+        //await pool.query('INSERT INTO users set ?', [req.body]);
+        //res.json({message: 'User Saved!'});
     }
 
     public async update (req: Request, res: Response) {

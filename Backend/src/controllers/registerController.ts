@@ -1,7 +1,6 @@
-import { Request, Response} from 'express';
+import { Request, Response } from 'express';
 import pool from '../database';
-const bcrypt = require('bcryptjs');
-const passport = require('passport');
+const bcryptjs = require('bcryptjs');
 
 class RegisterControllers {
 
@@ -13,7 +12,8 @@ class RegisterControllers {
         await pool.query('INSERT INTO users set ?', [req.body]);
         res.json({message: 'User was Registered!'});
     }
-
 }
 
 export const RegisterController = new RegisterControllers();
+
+export default RegisterControllers;

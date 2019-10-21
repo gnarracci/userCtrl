@@ -8,4 +8,5 @@ export interface User {
     country?: string;
     description?: string;
     created_at?: Date;
-}
+};
+

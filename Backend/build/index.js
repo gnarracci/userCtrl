@@ -6,7 +6,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const morgan_1 = __importDefault(require("morgan"));
 const cors_1 = __importDefault(require("cors"));
-const passport_1 = __importDefault(require("passport"));
 const session = require('express-session');
 const MySQLStore = require('express-mysql-session')(session);
 const { database } = require('./keys');
@@ -15,7 +14,6 @@ const userRoutes_1 = __importDefault(require("./routes/userRoutes"));
 const authRoutes_1 = __importDefault(require("./routes/authRoutes"));
 const registerRoutes_1 = __importDefault(require("./routes/registerRoutes"));
 const sessionStore = new MySQLStore(database);
-require('./passport-config');
 class Server {
     constructor() {
         this.app = express_1.default();
@@ -35,8 +33,6 @@ class Server {
         this.app.use(cors_1.default());
         this.app.use(express_1.default.json());
         this.app.use(express_1.default.urlencoded({ extended: false }));
-        this.app.use(passport_1.default.initialize());
-        this.app.use(passport_1.default.session());
     }
     routes() {
         this.app.use('/', indexRoutes_1.default);

@@ -12,7 +12,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const database_1 = __importDefault(require("../database"));
-const bcrypt = require('bcryptjs');
 class UserControllers {
     list(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -32,8 +31,14 @@ class UserControllers {
     }
     create(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            yield database_1.default.query('INSERT INTO users set ?', [req.body]);
-            res.json({ message: 'User Saved!' });
+            const newUser = {
+                username: req.body.username,
+                password: req.body.password,
+                email: req.body.email
+            };
+            res.json(newUser);
+            //await pool.query('INSERT INTO users set ?', [req.body]);
+            //res.json({message: 'User Saved!'});
         });
     }
     update(req, res) {
