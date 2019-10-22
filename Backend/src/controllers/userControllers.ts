@@ -1,6 +1,6 @@
 import { Request, Response} from 'express';
 import pool from '../database';
-import helpers from '../helpers';
+import { hashUser } from './../helpers';
 
 class UserControllers {
 
@@ -22,16 +22,30 @@ class UserControllers {
         const newUser = {
             username: req.body.username,
             password: req.body.password,
-            email: req.body.email
-        }
-        res.json(newUser);
-        //await pool.query('INSERT INTO users set ?', [req.body]);
-        //res.json({message: 'User Saved!'});
+            email: req.body.email,
+            image: req.body.image,
+            role: req.body.role,
+            country: req.body.country,
+            description: req.body.description
+        };
+        newUser.password = await hashUser.encryptPassword(newUser.password);
+        await pool.query('INSERT INTO users set ?', [newUser]);
+        res.json({message: 'User Saved!'});
     }
 
     public async update (req: Request, res: Response) {
         const { id } = req.params;
-        await pool.query('UPDATE users set ? WHERE id = ?', [req.body, id]);
+        const updateUser = {
+            username: req.body.username,
+            password: req.body.password,
+            email: req.body.email,
+            image: req.body.image,
+            role: req.body.role,
+            country: req.body.country,
+            description: req.body.description
+        };
+        updateUser.password = await hashUser.encryptPassword(updateUser.password);
+        await pool.query('UPDATE users set ? WHERE id = ?', [updateUser, id]);
         res.json({message: 'The User was Updated!'});
     }
 

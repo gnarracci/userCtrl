@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import pool from '../database';
-const bcryptjs = require('bcryptjs');
+import { hashUser } from './../helpers';
 
 class RegisterControllers {
 
@@ -9,7 +9,17 @@ class RegisterControllers {
     }
 
     public async register (req: Request, res: Response) {
-        await pool.query('INSERT INTO users set ?', [req.body]);
+        const newUser = {
+            username: req.body.username,
+            password: req.body.password,
+            email: req.body.email,
+            image: req.body.image,
+            role: req.body.role,
+            country: req.body.country,
+            description: req.body.description
+        };
+        newUser.password = await hashUser.encryptPassword(newUser.password);
+        await pool.query('INSERT INTO users set ?', [newUser]);
         res.json({message: 'User was Registered!'});
     }
 }

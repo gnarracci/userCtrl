@@ -12,14 +12,24 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const database_1 = __importDefault(require("../database"));
-const bcryptjs = require('bcryptjs');
+const helpers_1 = require("./../helpers");
 class RegisterControllers {
     info(req, res) {
         res.json({ text: 'API Register Routes Works!!!' });
     }
     register(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            yield database_1.default.query('INSERT INTO users set ?', [req.body]);
+            const newUser = {
+                username: req.body.username,
+                password: req.body.password,
+                email: req.body.email,
+                image: req.body.image,
+                role: req.body.role,
+                country: req.body.country,
+                description: req.body.description
+            };
+            newUser.password = yield helpers_1.hashUser.encryptPassword(newUser.password);
+            yield database_1.default.query('INSERT INTO users set ?', [newUser]);
             res.json({ message: 'User was Registered!' });
         });
     }

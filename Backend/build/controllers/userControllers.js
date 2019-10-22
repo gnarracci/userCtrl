@@ -12,6 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const database_1 = __importDefault(require("../database"));
+const helpers_1 = require("./../helpers");
 class UserControllers {
     list(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -34,17 +35,31 @@ class UserControllers {
             const newUser = {
                 username: req.body.username,
                 password: req.body.password,
-                email: req.body.email
+                email: req.body.email,
+                image: req.body.image,
+                role: req.body.role,
+                country: req.body.country,
+                description: req.body.description
             };
-            res.json(newUser);
-            //await pool.query('INSERT INTO users set ?', [req.body]);
-            //res.json({message: 'User Saved!'});
+            newUser.password = yield helpers_1.hashUser.encryptPassword(newUser.password);
+            yield database_1.default.query('INSERT INTO users set ?', [newUser]);
+            res.json({ message: 'User Saved!' });
         });
     }
     update(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const { id } = req.params;
-            yield database_1.default.query('UPDATE users set ? WHERE id = ?', [req.body, id]);
+            const updateUser = {
+                username: req.body.username,
+                password: req.body.password,
+                email: req.body.email,
+                image: req.body.image,
+                role: req.body.role,
+                country: req.body.country,
+                description: req.body.description
+            };
+            updateUser.password = yield helpers_1.hashUser.encryptPassword(updateUser.password);
+            yield database_1.default.query('UPDATE users set ? WHERE id = ?', [updateUser, id]);
             res.json({ message: 'The User was Updated!' });
         });
     }
