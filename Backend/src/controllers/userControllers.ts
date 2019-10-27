@@ -18,7 +18,7 @@ class UserControllers {
         res.status(404).json({text: "User doesn't exists!"});
     }
 
-    public async create (req: Request, res: Response) {
+    public async create (req: Request, res: Response, done: any) {
         const newUser = {
             username: req.body.username,
             password: req.body.password,

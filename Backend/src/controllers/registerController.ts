@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import pool from '../database';
 import { hashUser } from './../helpers';
+import passport from 'passport';
 
 class RegisterControllers {
 
@@ -8,7 +9,7 @@ class RegisterControllers {
         res.json({ text: 'API Register Routes Works!!!' });
     }
 
-    public async register (req: Request, res: Response) {
+    public async register (req: Request, res: Response, done: any) {
         const newUser = {
             username: req.body.username,
             password: req.body.password,
@@ -19,9 +20,12 @@ class RegisterControllers {
             description: req.body.description
         };
         newUser.password = await hashUser.encryptPassword(newUser.password);
-        await pool.query('INSERT INTO users set ?', [newUser]);
+        const result = await pool.query('INSERT INTO users set ?', [newUser]);
         res.json({message: 'User was Registered!'});
+        const identi = result.insertId;
     }
+
+    
 }
 
 export const RegisterController = new RegisterControllers();

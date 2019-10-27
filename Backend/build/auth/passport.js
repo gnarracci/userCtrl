@@ -7,17 +7,25 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-class AuthControllers {
-    info(req, res) {
-        res.json({ text: 'API Login Routes Works!!!' });
+const passport_1 = __importDefault(require("passport"));
+const database_1 = __importDefault(require("../database"));
+const LocalStrategy = require('passport-local').LocalStrategy;
+class Serialize {
+    serializeUser() {
+        passport_1.default.serializeUser((username, done) => {
+            done(null, username);
+        });
     }
-    login(req, res) {
+    deserializeUser(username, done) {
         return __awaiter(this, void 0, void 0, function* () {
-            const credentials = req.body;
-            console.log(credentials);
+            const rows = yield database_1.default.query('SELECT * FROM users WHERE username = ?', [username]);
+            done(null, rows[0]);
         });
     }
 }
-exports.AuthController = new AuthControllers();
-exports.default = AuthControllers;
+exports.serialize = new Serialize();
+exports.default = Serialize;

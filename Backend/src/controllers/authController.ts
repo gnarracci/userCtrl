@@ -7,8 +7,9 @@ class AuthControllers {
         res.json({ text: 'API Login Routes Works!!!' });
     }
 
-    public async login (req: Request, res: Response, info: any) {
-        //console.log('Datos Recibidos en el Back:', req.body);
+    public async login (req: Request, res: Response) {
+        const credentials = req.body;
+        console.log(credentials);
     }
 }
 

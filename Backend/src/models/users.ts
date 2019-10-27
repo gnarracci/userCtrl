@@ -9,4 +9,3 @@ export interface User {
     description?: string;
     created_at?: Date;
 };
-
