@@ -17,7 +17,7 @@ class RegisterControllers {
     info(req, res) {
         res.json({ text: 'API Register Routes Works!!!' });
     }
-    register(req, res, done) {
+    register(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const newUser = {
                 username: req.body.username,
@@ -31,7 +31,7 @@ class RegisterControllers {
             newUser.password = yield helpers_1.hashUser.encryptPassword(newUser.password);
             const result = yield database_1.default.query('INSERT INTO users set ?', [newUser]);
             res.json({ message: 'User was Registered!' });
-            const identi = result.insertId;
+            const identy = result.insertId;
         });
     }
 }

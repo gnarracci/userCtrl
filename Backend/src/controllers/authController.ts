@@ -8,8 +8,9 @@ class AuthControllers {
     }
 
     public async login (req: Request, res: Response) {
-        const credentials = req.body;
-        console.log(credentials);
+        const username = req.body.username;
+        const password = req.body.password;
+        console.log(username, password);
     }
 }
 

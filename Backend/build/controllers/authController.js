@@ -14,8 +14,9 @@ class AuthControllers {
     }
     login(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const credentials = req.body;
-            console.log(credentials);
+            const username = req.body.username;
+            const password = req.body.password;
+            console.log(username, password);
         });
     }
 }
