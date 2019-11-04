@@ -73,3 +73,4 @@ class UserControllers {
 }
 exports.userController = new UserControllers();
 exports.default = UserControllers;
+//# sourceMappingURL=userControllers.js.map

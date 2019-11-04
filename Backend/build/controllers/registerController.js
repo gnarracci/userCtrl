@@ -13,10 +13,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const database_1 = __importDefault(require("../database"));
 const helpers_1 = require("./../helpers");
+const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
+const SECRET_KEY = "secret_user_ctrl";
 class RegisterControllers {
-    info(req, res) {
-        res.json({ text: 'API Register Routes Works!!!' });
-    }
     register(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const newUser = {
@@ -30,10 +29,11 @@ class RegisterControllers {
             };
             newUser.password = yield helpers_1.hashUser.encryptPassword(newUser.password);
             const result = yield database_1.default.query('INSERT INTO users set ?', [newUser]);
-            res.json({ message: 'User was Registered!' });
-            const identy = result.insertId;
+            const token = jsonwebtoken_1.default.sign({ id: result.insertId }, SECRET_KEY);
+            res.header("auth-token", token).json({ message: 'User was Registered!' });
         });
     }
 }
 exports.RegisterController = new RegisterControllers();
 exports.default = RegisterControllers;
+//# sourceMappingURL=registerController.js.map

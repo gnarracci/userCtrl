@@ -10,11 +10,8 @@ class HashUser {
     }
 
     public async matchPassword (password: any, savedPassword: any) {
-        try{
-            await bcryptjs.compare(password, savedPassword);
-        }catch(e){
-            console.log(e);
-        }
+       const match = await bcryptjs.compare(password, savedPassword);
+       return match;
     }
 
 }

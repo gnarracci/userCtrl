@@ -16,7 +16,7 @@ export class RegisterComponent implements OnInit {
     password: '',
     email: '',
     image: '',
-    role: 'USER',
+    role: 'USER', // By default for all new users
     country: '',
     description: '',
     created_at: new Date()

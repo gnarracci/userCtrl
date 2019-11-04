@@ -8,9 +8,9 @@ class RegisterRoutes {
         this.config();
     }
     config() {
-        this.router.get('/', registerController_1.RegisterController.info);
         this.router.post('/', registerController_1.RegisterController.register);
     }
 }
 const registerRoutes = new RegisterRoutes();
 exports.default = registerRoutes.router;
+//# sourceMappingURL=registerRoutes.js.map

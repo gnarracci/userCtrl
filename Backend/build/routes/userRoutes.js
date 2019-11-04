@@ -17,3 +17,4 @@ class UserRoutes {
 }
 const userRoutes = new UserRoutes();
 exports.default = userRoutes.router;
+//# sourceMappingURL=userRoutes.js.map

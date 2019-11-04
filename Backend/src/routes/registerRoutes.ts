@@ -11,7 +11,6 @@ class RegisterRoutes {
     }
 
     config(): void{
-        this.router.get('/', RegisterController.info);
         this.router.post('/', RegisterController.register);
     }
 }

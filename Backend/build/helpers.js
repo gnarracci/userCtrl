@@ -22,14 +22,11 @@ class HashUser {
     }
     matchPassword(password, savedPassword) {
         return __awaiter(this, void 0, void 0, function* () {
-            try {
-                yield bcryptjs_1.default.compare(password, savedPassword);
-            }
-            catch (e) {
-                console.log(e);
-            }
+            const match = yield bcryptjs_1.default.compare(password, savedPassword);
+            return match;
         });
     }
 }
 exports.hashUser = new HashUser();
 exports.default = HashUser;
+//# sourceMappingURL=helpers.js.map

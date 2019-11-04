@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import { AuthController } from './../controllers/authController';
+import { TokenValidation } from './../auth/validateToken';
 
 class AuthRoutes {
 
@@ -10,8 +11,8 @@ class AuthRoutes {
     }
 
     config(): void{
-        this.router.get('/', AuthController.info);
         this.router.post('/', AuthController.login);
+        this.router.get('/', TokenValidation , AuthController.profile);
     }
 }
 

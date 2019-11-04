@@ -40,4 +40,9 @@ export class AuthService {
     loginUser(user: User): Observable<User> {
       return this.http.post(`${this.API_URI}/auth/login`, user);
     }
+
+    dataUser() {
+      return this.http.get(`${this.API_URI}/auth/profile`);
+    }
+
 }

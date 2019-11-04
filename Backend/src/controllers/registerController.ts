@@ -1,12 +1,10 @@
 import { Request, Response } from 'express';
 import pool from '../database';
 import { hashUser } from './../helpers';
+import jwt from 'jsonwebtoken';
+const SECRET_KEY = "secret_user_ctrl";
 
 class RegisterControllers {
-
-    public info (req: Request, res: Response) {
-        res.json({ text: 'API Register Routes Works!!!' });
-    }
 
     public async register (req: Request, res: Response) {
         const newUser = {
@@ -20,10 +18,10 @@ class RegisterControllers {
         };
         newUser.password = await hashUser.encryptPassword(newUser.password);
         const result = await pool.query('INSERT INTO users set ?', [newUser]);
-        res.json({message: 'User was Registered!'});
-        const identy = result.insertId;
+        const token: string = jwt.sign({id: result.insertId}, SECRET_KEY);
+        res.header("auth-token", token).json({message: 'User was Registered!'});
+        
     }
-
 }
 
 export const RegisterController = new RegisterControllers();

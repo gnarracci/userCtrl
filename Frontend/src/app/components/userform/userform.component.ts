@@ -35,7 +35,6 @@ export class UserformComponent implements OnInit {
       this.authService.getUser(params.id)
       .subscribe(
         res => {
-          console.log(res);
           this.user = res;
           this.edit = true;
         },
@@ -49,7 +48,6 @@ export class UserformComponent implements OnInit {
     delete this.user.created_at;
     this.authService.saveUser(this.user).subscribe(
       res => {
-        console.log(res);
         this.router.navigate(['/dashboard']);
       },
       err => console.error(err)
@@ -60,8 +58,6 @@ export class UserformComponent implements OnInit {
     delete this.user.created_at;
     this.authService.updateUser(this.user.id, this.user).subscribe(
       res => {
-        console.log(res);
-        console.log(this.user);
         this.router.navigate(['/dashboard']);
       },
       err => console.error(err)
