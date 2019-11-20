@@ -12,7 +12,7 @@ class AuthRoutes {
 
     config(): void{
         this.router.post('/', AuthController.login);
-        this.router.get('/', TokenValidation , AuthController.profile);
+        this.router.get('/', TokenValidation, AuthController.profile);
     }
 }
 

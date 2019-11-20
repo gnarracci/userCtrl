@@ -2,8 +2,6 @@ import express, { Application } from 'express'
 import morgan from 'morgan';
 import cors from 'cors';
 
-const { database } = require('./keys');
-
 import indexRoutes from './routes/indexRoutes';
 import userRoutes from './routes/userRoutes';
 import authRoutes from './routes/authRoutes';

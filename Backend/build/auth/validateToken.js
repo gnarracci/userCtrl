@@ -11,6 +11,7 @@ exports.TokenValidation = (req, res, next) => {
         return res.status(401).json({ message: 'Access Denied!' });
     const payload = jsonwebtoken_1.default.verify(token, SECRET_KEY);
     req.userId = payload.id;
+    console.log(req.userId);
     next();
 };
 //# sourceMappingURL=validateToken.js.map

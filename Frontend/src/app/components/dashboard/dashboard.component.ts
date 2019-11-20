@@ -21,7 +21,7 @@ export class DashboardComponent implements OnInit {
   getUsers() {
     this.authService.getUsers().subscribe(
       res => {
-        //this.users = res;
+        this.users = res;
         console.log(res);
       },
       err => console.error(err)

@@ -12,14 +12,15 @@ export class ProfileComponent implements OnInit {
 
   constructor(private authService: AuthService) { }
 
-  ngOnInit() { 
-    this.dataUser()
-   }
+  ngOnInit() {
+    this.dataUser();
+  }
 
   dataUser() {
     this.authService.dataUser().subscribe(
       res => {
         this.users = res;
+        console.log(res);
       },
       err => console.error(err)
     );

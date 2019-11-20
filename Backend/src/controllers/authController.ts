@@ -7,38 +7,38 @@ const SECRET_KEY = "secret_user_ctrl";
 class AuthControllers {
 
     public async login (req: Request, res: Response) {
-        const username = req.body.username;
-        const password = req.body.password;
 
-        const userSearch = await pool.query("SELECT * FROM users WHERE username = ?", [username]);
         try{
-            if (userSearch.length > 0) { console.log(userSearch[0].username); } else { res.status(404).json({message: 'Username is Wrong!'}); }
+            const userData = {
+                username: req.body.username,
+                password: req.body.password
+            }
+            const expireIn = 60 * 60 * 2 //7200 ms = 2 hrs
+            const search = await pool.query("SELECT * FROM users WHERE username = ?", [userData.username]);
+            if (search.length > 0) { /*console.log(search[0].username);*/ } else { res.status(404).json({message: 'Username is Wrong!'}); }
+            const userPassStored = search[0].password;
+            const validate = await hashUser.matchPassword(userData.password, userPassStored);
+            if (!validate) { return res.status(404).json({message: "Passwords don't match!"});}
+            const token: string = jwt.sign({id: search[0].id}, SECRET_KEY, {
+                expiresIn: expireIn
+            });
+            res.header('auth-token', token).json({message: 'User Access Successfully!'});
+            const userToken = {
+                token: token,
+                expireIn: expireIn,
+                id_users: search[0].id
+            }
+            const result = await pool.query("INSERT INTO saveTokens SET ?", [userToken]);
         }catch (err) {
-            console.error(err);
+            console.log(err);
         }
-
-        const userPassSended = password;
-        const userPassStored = userSearch[0].password;
-        const expireIn = 60 * 60; // 3600 ms = 1 hr
-
-        const validate = await hashUser.matchPassword(userPassSended, userPassStored);
-        if (!validate) { res.status(404).json({message: "Password don't match!"}) };
-        console.log(validate);
-        const token: string = jwt.sign({id: userSearch[0].id}, SECRET_KEY, {
-            expiresIn: expireIn
-        });
-        console.log(token);
-        res.header('auth-token', token).json({message: 'User Access Successfully!'});
     }
 
     public async profile (req: Request, res: Response) {
-        const token = req.header('auth-token');
-        const id = (req.userId);
-        const userData = await pool.query("SELECT * FROM users WHERE id = ?", [id]);
-        try{
-            if (userData.length > 0) return res.status(200).json(userData[0]);
-        }catch (err) {
-           if (!userData) return res.status(404).json({message: "User don't found!"});
+        const userData = await pool.query("SELECT * FROM users WHERE id = ?", [req.userId]);
+        if (userData.length > 0) {
+            res.status(200).json(userData[0]);
+            //console.log(userData[0]);
         }
     }
 }

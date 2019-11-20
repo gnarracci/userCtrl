@@ -1,4 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
+import pool from '../database';
 import jwt from 'jsonwebtoken';
 const SECRET_KEY = "secret_user_ctrl";
 
@@ -13,5 +14,6 @@ export const TokenValidation = (req: Request, res: Response, next: NextFunction)
     if (!token) return res.status(401).json({message: 'Access Denied!'});
     const payload = jwt.verify(token, SECRET_KEY) as IPayload;
     req.userId = payload.id;
+    console.log(req.userId);
     next();
 }

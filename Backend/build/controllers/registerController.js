@@ -28,7 +28,7 @@ class RegisterControllers {
                 description: req.body.description
             };
             newUser.password = yield helpers_1.hashUser.encryptPassword(newUser.password);
-            const result = yield database_1.default.query('INSERT INTO users set ?', [newUser]);
+            const result = yield database_1.default.query('INSERT INTO users SET  ?', [newUser]);
             const token = jsonwebtoken_1.default.sign({ id: result.insertId }, SECRET_KEY);
             res.header("auth-token", token).json({ message: 'User was Registered!' });
         });

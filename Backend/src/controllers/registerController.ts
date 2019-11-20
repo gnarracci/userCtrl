@@ -17,10 +17,9 @@ class RegisterControllers {
             description: req.body.description
         };
         newUser.password = await hashUser.encryptPassword(newUser.password);
-        const result = await pool.query('INSERT INTO users set ?', [newUser]);
-        const token: string = jwt.sign({id: result.insertId}, SECRET_KEY);
+        const result = await pool.query('INSERT INTO users SET  ?', [newUser]);
+        const token = jwt.sign({id: result.insertId}, SECRET_KEY);
         res.header("auth-token", token).json({message: 'User was Registered!'});
-        
     }
 }
 
