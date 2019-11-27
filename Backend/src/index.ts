@@ -1,11 +1,13 @@
 import express, { Application } from 'express'
 import morgan from 'morgan';
+
 import cors from 'cors';
 
-import indexRoutes from './routes/indexRoutes';
-import userRoutes from './routes/userRoutes';
 import authRoutes from './routes/authRoutes';
+import indexRoutes from './routes/indexRoutes';
 import registerRoutes from './routes/registerRoutes';
+import tokenRoutes from './routes/tokenRoutes';
+import userRoutes from './routes/userRoutes';
 
 class Server {
 
@@ -29,6 +31,7 @@ class Server {
         this.app.use('/', indexRoutes);
         this.app.use('/api/users', userRoutes);
         this.app.use('/api/auth/login', authRoutes);
+        this.app.use('/api/auth/loggedIn', tokenRoutes);
         this.app.use('/api/auth/profile', authRoutes);
         this.app.use('/api/auth/register', registerRoutes);
     }

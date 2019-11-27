@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders} from '@angular/common/http';
+import { HttpClient} from '@angular/common/http';
 
 import { Observable } from 'rxjs';
 
 import { User } from '../models/users';
-import { JWT } from '../models/jwtresponse';
 
 @Injectable({
   providedIn: 'root'
@@ -12,8 +11,6 @@ import { JWT } from '../models/jwtresponse';
 export class AuthService {
 
   API_URI = 'http://localhost:3000/api';
-  
-  headers = new Headers();
 
   constructor(private http: HttpClient) { }
 
@@ -43,6 +40,10 @@ export class AuthService {
 
     loginUser(user: User): Observable<User> {
       return this.http.post(`${this.API_URI}/auth/login`, user);
+    }
+
+    loggedIn() {
+      return this.http.get(`${this.API_URI}/auth/loggedIn`);
     }
 
     dataUser() {

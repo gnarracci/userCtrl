@@ -11,9 +11,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const database_1 = __importDefault(require("../database"));
 const helpers_1 = require("./../helpers");
-const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const SECRET_KEY = "secret_user_ctrl";
 class AuthControllers {
     login(req, res) {
@@ -43,6 +43,8 @@ class AuthControllers {
                     expireIn: expireIn,
                     id_users: search[0].id
                 };
+                req.userIndex = search[0].id;
+                console.log("Id User", req.userIndex);
                 const result = yield database_1.default.query("INSERT INTO saveTokens SET ?", [userToken]);
             }
             catch (err) {
@@ -55,7 +57,14 @@ class AuthControllers {
             const userData = yield database_1.default.query("SELECT * FROM users WHERE id = ?", [req.userId]);
             if (userData.length > 0) {
                 res.status(200).json(userData[0]);
-                //console.log(userData[0]);
+            }
+        });
+    }
+    loggedIn(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const resultToken = yield database_1.default.query("SELECT * FROM saveTokens WHERE id_users = ?", [req.userIndex]);
+            if (resultToken > 0) {
+                res.status(200).json(resultToken[0].token);
             }
         });
     }

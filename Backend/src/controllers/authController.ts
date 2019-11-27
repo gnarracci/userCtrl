@@ -1,7 +1,9 @@
 import { Request, Response } from 'express';
+
+import jwt from 'jsonwebtoken';
+
 import pool from '../database';
 import { hashUser } from './../helpers';
-import jwt from 'jsonwebtoken';
 const SECRET_KEY = "secret_user_ctrl";
 
 class AuthControllers {
@@ -28,6 +30,8 @@ class AuthControllers {
                 expireIn: expireIn,
                 id_users: search[0].id
             }
+            req.userIndex = search[0].id;
+            console.log("Id User", req.userIndex);
             const result = await pool.query("INSERT INTO saveTokens SET ?", [userToken]);
         }catch (err) {
             console.log(err);
@@ -38,9 +42,16 @@ class AuthControllers {
         const userData = await pool.query("SELECT * FROM users WHERE id = ?", [req.userId]);
         if (userData.length > 0) {
             res.status(200).json(userData[0]);
-            //console.log(userData[0]);
         }
     }
+
+    public async loggedIn(req: Request, res: Response) {
+        const resultToken = await pool.query("SELECT * FROM saveTokens WHERE id_users = ?", [req.userIndex]);
+        if (resultToken > 0) {
+            res.status(200).json(resultToken[0].token);
+        }
+    }
+
 }
 
 export const AuthController = new AuthControllers();
