@@ -37,15 +37,7 @@ class AuthControllers {
                 const token = jsonwebtoken_1.default.sign({ id: search[0].id }, SECRET_KEY, {
                     expiresIn: expireIn
                 });
-                res.header('auth-token', token).json({ message: 'User Access Successfully!' });
-                const userToken = {
-                    token: token,
-                    expireIn: expireIn,
-                    id_users: search[0].id
-                };
-                req.userIndex = search[0].id;
-                console.log("Id User", req.userIndex);
-                const result = yield database_1.default.query("INSERT INTO saveTokens SET ?", [userToken]);
+                return res.status(200).json({ token });
             }
             catch (err) {
                 console.log(err);
@@ -57,14 +49,6 @@ class AuthControllers {
             const userData = yield database_1.default.query("SELECT * FROM users WHERE id = ?", [req.userId]);
             if (userData.length > 0) {
                 res.status(200).json(userData[0]);
-            }
-        });
-    }
-    loggedIn(req, res) {
-        return __awaiter(this, void 0, void 0, function* () {
-            const resultToken = yield database_1.default.query("SELECT * FROM saveTokens WHERE id_users = ?", [req.userIndex]);
-            if (resultToken > 0) {
-                res.status(200).json(resultToken[0].token);
             }
         });
     }

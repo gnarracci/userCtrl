@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+
 import { AuthService } from './../../services/auth.service';
 
 @Component({
@@ -8,18 +9,18 @@ import { AuthService } from './../../services/auth.service';
 })
 export class ProfileComponent implements OnInit {
 
-  users: any = [];
+  userlogged: any = [];
 
   constructor(private authService: AuthService) { }
 
   ngOnInit() {
     this.dataUser();
-  }
+   }
 
   dataUser() {
     this.authService.dataUser().subscribe(
       res => {
-        this.users = res;
+        this.userlogged = res;
         console.log(res);
       },
       err => console.error(err)

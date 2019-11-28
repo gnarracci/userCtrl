@@ -1,4 +1,5 @@
 import { Component, OnInit, HostBinding } from '@angular/core';
+
 import { AuthService } from '../../services/auth.service';
 
 @Component({
@@ -15,7 +16,7 @@ export class DashboardComponent implements OnInit {
   constructor(private authService: AuthService) { }
 
   ngOnInit() {
-    this.getUsers()
+    this.getUsers();
   }
 
   getUsers() {

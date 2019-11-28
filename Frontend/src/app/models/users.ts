@@ -9,4 +9,5 @@ export interface User {
     description?: string;
     created_at?: Date;
     updated_at?: Date;
+    token?: string;
 }

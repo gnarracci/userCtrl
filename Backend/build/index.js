@@ -7,9 +7,7 @@ const express_1 = __importDefault(require("express"));
 const morgan_1 = __importDefault(require("morgan"));
 const cors_1 = __importDefault(require("cors"));
 const authRoutes_1 = __importDefault(require("./routes/authRoutes"));
-const indexRoutes_1 = __importDefault(require("./routes/indexRoutes"));
 const registerRoutes_1 = __importDefault(require("./routes/registerRoutes"));
-const tokenRoutes_1 = __importDefault(require("./routes/tokenRoutes"));
 const userRoutes_1 = __importDefault(require("./routes/userRoutes"));
 class Server {
     constructor() {
@@ -25,10 +23,8 @@ class Server {
         this.app.use(express_1.default.urlencoded({ extended: false }));
     }
     routes() {
-        this.app.use('/', indexRoutes_1.default);
         this.app.use('/api/users', userRoutes_1.default);
         this.app.use('/api/auth/login', authRoutes_1.default);
-        this.app.use('/api/auth/loggedIn', tokenRoutes_1.default);
         this.app.use('/api/auth/profile', authRoutes_1.default);
         this.app.use('/api/auth/register', registerRoutes_1.default);
     }

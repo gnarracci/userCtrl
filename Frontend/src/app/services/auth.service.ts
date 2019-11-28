@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient} from '@angular/common/http';
+import { Router } from '@angular/router';
 
 import { Observable } from 'rxjs';
 
@@ -12,7 +13,7 @@ export class AuthService {
 
   API_URI = 'http://localhost:3000/api';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private router: Router) { }
 
     getUsers() {
       return this.http.get(`${this.API_URI}/users`);
@@ -42,12 +43,22 @@ export class AuthService {
       return this.http.post(`${this.API_URI}/auth/login`, user);
     }
 
-    loggedIn() {
-      return this.http.get(`${this.API_URI}/auth/loggedIn`);
+    // tslint:disable-next-line: ban-types
+    loggedIn(): Boolean {
+      return !!localStorage.getItem('token');
+    }
+
+    getToken() {
+      return localStorage.getItem('token');
     }
 
     dataUser() {
       return this.http.get(`${this.API_URI}/auth/profile`);
+    }
+
+    logOut() {
+      localStorage.removeItem('token');
+      this.router.navigate(['/login']);
     }
 
 }

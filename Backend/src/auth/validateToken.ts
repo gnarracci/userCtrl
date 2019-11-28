@@ -2,7 +2,6 @@ import { Request, Response, NextFunction } from 'express';
 
 import jwt from 'jsonwebtoken';
 
-import pool from '../database';
 const SECRET_KEY = "secret_user_ctrl";
 
 interface IPayload {
@@ -12,7 +11,8 @@ interface IPayload {
 }
 
 export const TokenValidation = (req: Request, res: Response, next: NextFunction) => {
-    const token = req.header('auth-token');
+    const token = req.header('Authorization');
+    console.log(token);
     if (!token || token === null) {
         return res.status(401).json({message: 'Access Denied!'});
     }
