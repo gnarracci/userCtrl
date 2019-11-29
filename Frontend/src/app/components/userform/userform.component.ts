@@ -1,7 +1,7 @@
 import { Component, OnInit, HostBinding } from '@angular/core';
-import { User } from './../../models/users';
 import { ActivatedRoute, Router } from '@angular/router';
 
+import { User } from './../../models/users';
 import { AuthService } from '../../services/auth.service';
 
 @Component({
@@ -25,7 +25,7 @@ export class UserformComponent implements OnInit {
     created_at: new Date()
   };
 
-  edit: boolean = false;
+  edit = false;
 
   constructor(private authService: AuthService, private router: Router, private activatedRoute: ActivatedRoute) { }
 

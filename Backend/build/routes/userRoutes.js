@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
+const validateToken_1 = require("./../auth/validateToken");
 const userControllers_1 = require("../controllers/userControllers");
 class UserRoutes {
     constructor() {
@@ -8,11 +9,11 @@ class UserRoutes {
         this.config();
     }
     config() {
-        this.router.get('/', userControllers_1.userController.list);
-        this.router.get('/:id', userControllers_1.userController.getOne);
-        this.router.post('/', userControllers_1.userController.create);
-        this.router.put('/:id', userControllers_1.userController.update);
-        this.router.delete('/:id', userControllers_1.userController.delete);
+        this.router.get('/', validateToken_1.TokenValidation, userControllers_1.userController.list);
+        this.router.get('/:id', validateToken_1.TokenValidation, userControllers_1.userController.getOne);
+        this.router.post('/', validateToken_1.TokenValidation, userControllers_1.userController.create);
+        this.router.put('/:id', validateToken_1.TokenValidation, userControllers_1.userController.update);
+        this.router.delete('/:id', validateToken_1.TokenValidation, userControllers_1.userController.delete);
     }
 }
 const userRoutes = new UserRoutes();

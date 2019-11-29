@@ -1,4 +1,6 @@
 import { Router } from 'express';
+
+import { TokenValidation } from './../auth/validateToken';
 import { userController } from '../controllers/userControllers';
 
 class UserRoutes {
@@ -10,11 +12,11 @@ class UserRoutes {
     }
 
     config(): void{
-        this.router.get('/', userController.list);
-        this.router.get('/:id', userController.getOne);
-        this.router.post('/', userController.create);
-        this.router.put('/:id', userController.update);
-        this.router.delete('/:id', userController.delete);
+        this.router.get('/', TokenValidation, userController.list);
+        this.router.get('/:id', TokenValidation, userController.getOne);
+        this.router.post('/', TokenValidation, userController.create);
+        this.router.put('/:id', TokenValidation, userController.update);
+        this.router.delete('/:id', TokenValidation, userController.delete);
     }
 }
 

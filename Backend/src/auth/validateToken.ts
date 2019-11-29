@@ -12,13 +12,11 @@ interface IPayload {
 
 export const TokenValidation = (req: Request, res: Response, next: NextFunction) => {
     const token = req.header('Authorization');
-    console.log(token);
     if (!token || token === null) {
         return res.status(401).json({message: 'Access Denied!'});
     }
 
     const payload = jwt.verify(token, SECRET_KEY) as IPayload;
     req.userId = payload.id;
-    console.log(req.userId);
     next();
 }

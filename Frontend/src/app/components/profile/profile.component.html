@@ -1,9 +1,27 @@
-<div class="jumbotron mt-5 mx-auto">
-  <h1 class="display-3">Welcome {{ userlogged.username }} !</h1>
-  <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
-  <hr class="my-4">
-  <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
-  <p class="lead">
-    <a class="btn btn-primary btn-lg"  role="button">Let's get Started!</a>
-  </p>
+<div class="row">
+    <div class="col-md-4 offset-md-2">
+        <div class="jumbotron mt-3 mx-auto">
+            <h2>Welcome {{ userlogged.fullname }}!!!</h2>
+            <p class="lead">Only Role Administrator can view all data in the system but only edit your own description.</p>
+            <hr class="my-4">
+            <p>Role: {{ userlogged.role }} </p>
+            <p>Country: {{ userlogged.country }} </p>
+            <p>Description: </p> <input type="text" name="description" size="40" [(ngModel)]="userlogged.description">
+            <hr class="my-4">
+            <p class="lead">
+              <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
+            </p>
+          </div>
+    </div>
+      <div class="col-md-4 mt-3">
+          <div class="card-header"><i class="fa fa-user-circle"></i> User Id Card</div>
+          <div class="card card-body text-left">
+              <img [src]="userlogged.image == '' ? 'assets/img/usuario-hombre.png' : userlogged.image" class="card-img-top">
+              <hr>
+              <p> <span>Email: </span> {{ userlogged.email == '' ? 'Email' : userlogged.email }} </p>
+              <p> <span>Creation Date: </span> {{ userlogged.created_at | date: 'yyyy-MM-dd' }} </p>
+              <p> <span>Updated at: </span> {{ userlogged.updated_at | date: 'yyyy-MM-dd' }} </p>
+              <hr>
+          </div>
+      </div>
 </div>
