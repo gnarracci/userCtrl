@@ -61,4 +61,10 @@ export class AuthService {
       this.router.navigate(['/login']);
     }
 
+    // Extras
+
+    getCountries() {
+      return this.http.get(`${this.API_URI}/users/extras`);
+    }
+
 }

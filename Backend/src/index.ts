@@ -4,6 +4,7 @@ import morgan from 'morgan';
 import cors from 'cors';
 
 import authRoutes from './routes/authRoutes';
+import indexRoutes from './routes/indexRoutes';
 import registerRoutes from './routes/registerRoutes';
 import userRoutes from './routes/userRoutes';
 
@@ -27,6 +28,7 @@ class Server {
 
     routes(): void {
         this.app.use('/api/users', userRoutes);
+        this.app.use('/api/users/extras', indexRoutes);
         this.app.use('/api/auth/login', authRoutes);
         this.app.use('/api/auth/profile', authRoutes);
         this.app.use('/api/auth/register', registerRoutes);

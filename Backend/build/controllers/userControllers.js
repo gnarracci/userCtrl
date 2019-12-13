@@ -1,9 +1,10 @@
 "use strict";
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
         function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
         function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
@@ -33,6 +34,7 @@ class UserControllers {
     create(req, res, done) {
         return __awaiter(this, void 0, void 0, function* () {
             const newUser = {
+                fullname: req.body.fullname,
                 username: req.body.username,
                 password: req.body.password,
                 email: req.body.email,
@@ -42,14 +44,15 @@ class UserControllers {
                 description: req.body.description
             };
             newUser.password = yield helpers_1.hashUser.encryptPassword(newUser.password);
-            yield database_1.default.query('INSERT INTO users set ?', [newUser]);
-            res.json({ message: 'User Saved!' });
+            yield database_1.default.query('INSERT INTO users SET ?', [newUser]);
+            res.json({ message: 'User was Saved!' });
         });
     }
     update(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const { id } = req.params;
             const updateUser = {
+                fullname: req.body.fullname,
                 username: req.body.username,
                 password: req.body.password,
                 email: req.body.email,
@@ -59,7 +62,7 @@ class UserControllers {
                 description: req.body.description
             };
             updateUser.password = yield helpers_1.hashUser.encryptPassword(updateUser.password);
-            yield database_1.default.query('UPDATE users set ? WHERE id = ?', [updateUser, id]);
+            yield database_1.default.query('UPDATE users SET ? WHERE id = ?', [updateUser, id]);
             res.json({ message: 'The User was Updated!' });
         });
     }

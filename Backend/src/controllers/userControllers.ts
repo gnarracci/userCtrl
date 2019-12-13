@@ -1,4 +1,5 @@
 import { Request, Response} from 'express';
+
 import pool from '../database';
 import { hashUser } from './../helpers';
 
@@ -20,6 +21,7 @@ class UserControllers {
 
     public async create (req: Request, res: Response, done: any) {
         const newUser = {
+            fullname: req.body.fullname,
             username: req.body.username,
             password: req.body.password,
             email: req.body.email,
@@ -29,13 +31,14 @@ class UserControllers {
             description: req.body.description
         };
         newUser.password = await hashUser.encryptPassword(newUser.password);
-        await pool.query('INSERT INTO users set ?', [newUser]);
-        res.json({message: 'User Saved!'});
+        await pool.query('INSERT INTO users SET ?', [newUser]);
+        res.json({message: 'User was Saved!'});
     }
 
     public async update (req: Request, res: Response) {
         const { id } = req.params;
         const updateUser = {
+            fullname: req.body.fullname,
             username: req.body.username,
             password: req.body.password,
             email: req.body.email,
@@ -45,7 +48,7 @@ class UserControllers {
             description: req.body.description
         };
         updateUser.password = await hashUser.encryptPassword(updateUser.password);
-        await pool.query('UPDATE users set ? WHERE id = ?', [updateUser, id]);
+        await pool.query('UPDATE users SET ? WHERE id = ?', [updateUser, id]);
         res.json({message: 'The User was Updated!'});
     }
 
