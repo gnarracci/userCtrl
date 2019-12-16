@@ -13,9 +13,9 @@ class IndexRoutes {
 
     config(): void{
         this.router.get('/', indexController.index);
-        this.router.get('/', indexController.countries);
     }
 }
 
 const indexRoutes = new IndexRoutes();
+
 export default indexRoutes.router;

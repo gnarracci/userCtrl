@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 
 import { User } from '../models/users';
+import { Role } from '../models/role';
 
 @Injectable({
   providedIn: 'root'
@@ -43,7 +44,6 @@ export class AuthService {
       return this.http.post(`${this.API_URI}/auth/login`, user);
     }
 
-    // tslint:disable-next-line: ban-types
     loggedIn(): Boolean {
       return !!localStorage.getItem('token');
     }
@@ -61,10 +61,14 @@ export class AuthService {
       this.router.navigate(['/login']);
     }
 
-    // Extras
+    // Misc
 
-    getCountries() {
-      return this.http.get(`${this.API_URI}/users/extras`);
+    addRole(role: Role) {
+      return this.http.post(`${this.API_URI}/ext/misc`, role);
+    }
+
+    getRoles() {
+      return this.http.get(`${this.API_URI}/ext/misc`);
     }
 
 }

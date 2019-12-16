@@ -17,6 +17,7 @@ import { NotfoundComponent } from './components/notfound/notfound.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { RegisterComponent } from './components/register/register.component';
 import { UserformComponent } from './components/userform/userform.component';
+import { MiscComponent } from './components/misc/misc.component';
 
 
 @NgModule({
@@ -29,7 +30,8 @@ import { UserformComponent } from './components/userform/userform.component';
     RegisterComponent,
     DashboardComponent,
     ProfileComponent,
-    UserformComponent
+    UserformComponent,
+    MiscComponent
   ],
   imports: [
     BrowserModule,

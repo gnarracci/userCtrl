@@ -31,7 +31,7 @@ class UserControllers {
             res.status(404).json({ text: "User doesn't exists!" });
         });
     }
-    create(req, res, done) {
+    create(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const newUser = {
                 fullname: req.body.fullname,

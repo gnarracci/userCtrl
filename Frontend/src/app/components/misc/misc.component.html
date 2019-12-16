@@ -1,0 +1,54 @@
+<div class="jumbotron mt-5 mx-auto">
+  <h1 class="display-5">Hello <span id="user"> {{ userlogged.fullname }} </span> !</h1>
+  <p class="lead">In this page you can add/edit/delete roles and countries in the system. </p>
+  <hr class="my-4">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-header"><span id="rc"> User Roles </span></div>
+        <div class="card-body">
+          <form (submit)="addRole()">
+            <div class="form-group">
+              <label for="role">Role</label>
+              <input type="text" name="role" id="role" class="form-control" [(ngModel)]="role.role" placeholder="Role" required>
+            </div>
+            <div class="form-group">
+              <label for="role_descrip">Role Description</label>
+              <input type="text" name="role_descrip" id="role_descrip" class="form-control" [(ngModel)]="role.role_descrip" placeholder="Role Description" required>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block btn-lg"><i class="fa fa-plus-circle"></i> Save Role</button>
+          </form>      
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="card-header"><span id="rc">Role Table</span></div>
+      <div class="card-body">
+
+      </div>
+    </div>
+  </div>
+  <hr class="my-4">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-header"><span id="rc"> Countries </span></div>
+        <div class="card-body">
+          <form>
+            <div class="form-group">
+              <label for="country">Add Country</label>
+              <input type="text" name="country" id="country" class="form-control" placeholder="Country" required>
+            </div>            
+            <button type="submit" class="btn btn-primary btn-block btn-lg"><i class="fa fa-plus-circle"></i> Save Country</button>
+          </form>      
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="card-header"><span id="rc"> Countries Table</span></div>
+      <div class="card-body">
+        
+      </div>
+    </div>
+  </div>  
+</div>

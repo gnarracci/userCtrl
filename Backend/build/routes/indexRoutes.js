@@ -9,7 +9,6 @@ class IndexRoutes {
     }
     config() {
         this.router.get('/', indexControllers_1.indexController.index);
-        this.router.get('/', indexControllers_1.indexController.countries);
     }
 }
 const indexRoutes = new IndexRoutes();

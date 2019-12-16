@@ -4,9 +4,9 @@ import morgan from 'morgan';
 import cors from 'cors';
 
 import authRoutes from './routes/authRoutes';
-import indexRoutes from './routes/indexRoutes';
 import registerRoutes from './routes/registerRoutes';
 import userRoutes from './routes/userRoutes';
+import miscRoutes from './routes/miscRoutes';
 
 class Server {
 
@@ -21,14 +21,14 @@ class Server {
     config(): void {
         this.app.set('port', process.env.PORT || 3000);
         this.app.use(morgan('dev'));
-        this.app.use(cors());
+        this.app.use(cors({origin: 'http://localhost:4200'}));
         this.app.use(express.json());
         this.app.use(express.urlencoded({extended: false}));
     }
 
     routes(): void {
         this.app.use('/api/users', userRoutes);
-        this.app.use('/api/users/extras', indexRoutes);
+        this.app.use('/api/ext/misc', miscRoutes);
         this.app.use('/api/auth/login', authRoutes);
         this.app.use('/api/auth/profile', authRoutes);
         this.app.use('/api/auth/register', registerRoutes);
