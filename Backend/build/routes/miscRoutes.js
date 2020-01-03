@@ -10,6 +10,7 @@ class MiscRoutes {
     }
     config() {
         this.router.get('/', validateToken_1.TokenValidation, miscController_1.miscControllers.viewRole);
+        this.router.get('/:id', validateToken_1.TokenValidation, miscController_1.miscControllers.getRole);
         this.router.post('/', validateToken_1.TokenValidation, miscController_1.miscControllers.addRole);
     }
 }

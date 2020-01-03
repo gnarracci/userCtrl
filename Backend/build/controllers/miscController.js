@@ -16,8 +16,18 @@ const database_1 = __importDefault(require("../database"));
 class miscController {
     viewRole(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const role = yield database_1.default.query("SELECT * FROM role");
-            res.status(200).json(role);
+            const roles = yield database_1.default.query("SELECT * FROM role");
+            res.status(200).json(roles);
+        });
+    }
+    getRole(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const { id } = req.params;
+            const role = yield database_1.default.query('SELECT * FROM role WHERE id = ?', [id]);
+            if (role.length > 0) {
+                return res.status(200).json(role[0]);
+            }
+            res.status(404).json({ message: "Role doesn't finded!" });
         });
     }
     addRole(req, res) {

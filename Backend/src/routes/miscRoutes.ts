@@ -13,6 +13,7 @@ class MiscRoutes {
 
     config(): void {
         this.router.get('/', TokenValidation, miscControllers.viewRole);
+        this.router.get('/:id', TokenValidation, miscControllers.getRole);
         this.router.post('/', TokenValidation, miscControllers.addRole);
     }
 

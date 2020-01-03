@@ -71,4 +71,8 @@ export class AuthService {
       return this.http.get(`${this.API_URI}/ext/misc`);
     }
 
+    getRole (id: string) {
+      return this.http.get(`${this.API_URI}/ext/misc/${id}`);
+    }
+
 }

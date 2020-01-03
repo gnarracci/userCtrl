@@ -1,28 +1,31 @@
 <div class="row">
-    <div class="col-md-4 offset-md-2">
+    <div class="col-md-12 mt-3 mb-2 text-right">
+      <span><i class="fa fa-user"> Logged as:</i> {{ userlogged.fullname }} </span>
+    </div>
+</div>
+<hr class="my-4">
+<div class="row">
+    <div class="col-md-6 mt-3 mb-3">
         <div class="jumbotron mt-3 mx-auto">
-            <h1 class="display-5">Welcome <span style="text-shadow: 1px 1px;"> {{userlogged.fullname}} </span>!</h1>
+            <h1 class="display-5"><i class="fa fa-user-circle-o"></i> Welcome</h1>
+            <h2 class="display-5 mx-auto"><span style="text-shadow: 1px 1px;"> {{ userlogged.fullname }} </span></h2>
             <p class="lead">Only Role Administrator can view all data in the system but only edit your own description.</p>
             <hr class="my-4">
-            <p>Role: <span style="text-shadow: 1px 1px;"> {{ userlogged.role }} </span></p>
-            <p>Country: {{ userlogged.country }} </p>
-            <p>Description: {{ userlogged.description }} </p> 
+            <p><i class="fa fa-user-circle"></i> User: {{ userlogged.fullname }} </p>
+            <p><i class="fa fa-user-secret"></i> Role:<span style="text-shadow: 1px 1px;"> {{ userlogged.role }} </span></p>
+            <p><i class="fa fa-star"></i> Country: {{ userlogged.country }} </p>
+            <p><i class="fa fa-book"></i> Description: {{ userlogged.description }} </p> 
+            <p><i class="fa fa-calendar-plus-o"></i> Created: {{ userlogged.created_at | date: 'MM-dd-yyyy' }} </p>
+            <p><i class="fa fa-calendar-check-o"></i> Updated: {{ userlogged.updated_at | date: 'MM-dd-yyyy' }} </p>
             <hr class="my-4">
-            <p class="lead">
-              <a class="btn btn-primary btn-lg" href="#" role="button"><i class="fa fa-pencil"></i>  Edit your Description</a>
-            </p>
+            <button class="btn-primary btn-block btn-lg" (click)="showModal()"><i class="fa fa-book"></i> Edit Description</button>
         </div>
     </div>
-      <div class="col-md-4 mt-3">
+      <div class="col-md-6 mt-3 mb-3">
           <div class="card-header"><i class="fa fa-address-card" aria-hidden="true"></i> User Id Card <span> {{ userlogged.fullname }} </span> </div>
           <div class="card card-body text-left">
               <img [src]="userlogged.image == '' ? 'assets/img/usuario-hombre.png' : userlogged.image" class="card-img-top">
-              <hr>
-              <p> <span>Username: </span> {{ userlogged.username }} </p>
-              <p> <span>Email: </span> {{ userlogged.email == '' ? 'Email' : userlogged.email }} </p>
-              <p> <span>Creation Date: </span> {{ userlogged.created_at | date: 'yyyy-MM-dd' }} </p>
-              <p> <span>Updated at: </span> {{ userlogged.updated_at | date: 'yyyy-MM-dd' }} </p>
-              <hr>
           </div>
       </div>
 </div>
+<hr class="my-4">

@@ -1,65 +1,69 @@
-<div class="row">
-  <div class="col-md-4 offset-md-2 mt-3">
-    <div class="card">
-      <div class="card-header"><i class="fa fa-arrow-circle-down"></i> Register </div>
-        <div class="card-body">
-          <form action="">
-            <div class="form-group">
-              <label for="fullname">Full Name</label>
-              <input type="text" name="fullname" id="fullname" class="form-control" [(ngModel)]="user.fullname" placeholder="full name" autofocus required>
-            </div>
-            <div class="form-group">
-              <label for="username">Username</label>
-              <input type="text" name="username" id="username" class="form-control"  [(ngModel)]="user.username" placeholder="username" required>
-            </div>
-            <div class="form-group">
-              <label for="password">Password</label>
-              <input type="password" name="password" id="password" class="form-control" [(ngModel)]="user.password" placeholder="password" required>
-            </div>
-            <div class="form-group">
-              <label for="repassword">Repeat password</label>
-              <input type="password" name="repassword" id="repassword" class="form-control" placeholder="re-type password" required>
-            </div>
-            <div class="form-group">
-              <label for="email">Email</label>
-              <input type="email" name="email" id="email" class="form-control" [(ngModel)]="user.email" placeholder="email" required>
-            </div>
-            <div class="form-group">
-              <label for="image">Load Image</label>
-              <input type="url" name="image" id="image" class="form-control" [(ngModel)]="user.image" placeholder="load image" required>
-            </div>
-            <div class="form-group">
-              <label for="country">Country</label>
-              <select name="country" name="country" [(ngModel)]="user.country" class="form-control" required>
-                <option value=""> -- Choose your Country -- </option>
-                <option value="France">France</option>
-                <option value="Italy">Italy</option>
-                <option value="Iceland">Iceland</option>
-                <option value="Japan">Japan</option>
-                <option value="Venezuela">Venezuela</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label for="description">Description</label>
-              <textarea name="description" id="description" rows="2" class="form-control" [(ngModel)]="user.description" placeholder="type a little description"></textarea>
-            </div>
-            <button type="submit" class="btn btn-primary btn-block btn-lg" (click)="saveNewUser()" ><i class="fa fa-arrow-circle-down"></i> Register</button>
-          </form>
-        </div>
+<div class="jumbotron mt-5 mx-auto">
+  <h1 class="display-5"><i class="fa fa-registered"> User Register</i></h1>
+  <p class="lead"><i class="fa fa-info-circle"></i>  Fill form and Register your User in the System.</p>
+  <div class="row">
+    <div class="col-md-6 mt-3 mb-3">
+      <div class="card">
+        <div class="card-header"><i class="fa fa-arrow-circle-down"></i> Register </div>
+          <div class="card-body">
+            <form action="">
+              <div class="form-group">
+                <label for="fullname">Full Name</label>
+                <input type="text" name="fullname" id="fullname" class="form-control" [(ngModel)]="user.fullname" placeholder="full name" autofocus required>
+              </div>
+              <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" name="username" id="username" class="form-control"  [(ngModel)]="user.username" placeholder="username" required>
+              </div>
+              <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" name="password" id="password" class="form-control" [(ngModel)]="user.password" placeholder="password" required>
+              </div>
+              <div class="form-group">
+                <label for="repassword">Repeat password</label>
+                <input type="password" name="repassword" id="repassword" class="form-control" placeholder="re-type password" required>
+              </div>
+              <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" name="email" id="email" class="form-control" [(ngModel)]="user.email" placeholder="email" required>
+              </div>
+              <div class="form-group">
+                <label for="image">Load Image</label>
+                <input type="url" name="image" id="image" class="form-control" [(ngModel)]="user.image" placeholder="load image" required>
+              </div>
+              <div class="form-group">
+                <label for="country">Country</label>
+                <select name="country" name="country" [(ngModel)]="user.country" class="custom-select" required>
+                  <option value=""> -- Choose your Country -- </option>
+                  <option value="France">France</option>
+                  <option value="Italy">Italy</option>
+                  <option value="Iceland">Iceland</option>
+                  <option value="Japan">Japan</option>
+                  <option value="Venezuela">Venezuela</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="description">Description</label>
+                <textarea name="description" id="description" rows="2" class="form-control" [(ngModel)]="user.description" placeholder="type a little description"></textarea>
+              </div>
+              <button type="submit" class="btn btn-primary btn-block btn-lg" (click)="saveNewUser()" ><i class="fa fa-arrow-circle-down"></i> Register</button>
+            </form>
+          </div>
+      </div>
     </div>
-  </div>
-  <div class="col-md-4 mt-3">
-    <div class="card-header"><i class="fa fa-address-card" aria-hidden="true"></i> User Register Card</div>
-    <div class="card card-body text-center">
-      <img [src]="user.image == '' ? 'assets/img/usuario-hombre.png' : user.image" class="card-img-top">
-      <hr>
-      <p><span>Full Name: </span> {{ user.fullname == '' ? 'FullName' : user.fullname}} </p>
-      <p><span>Username: </span> {{ user.username == '' ? 'Username' : user.username }} </p>
-      <p><span>Email: </span> {{ user.email == '' ? 'Email' : user.email }} </p>
-      <p><span>Country: </span> {{ user.country == '' ? 'Country' : user.country }} </p>
-      <p><span>Role: </span> {{ user.role == '' ? 'Role' : user.role }} </p>
-      <p><span>Description: </span> {{ user.description == '' ? 'User Description' : user.description }} </p>
-      <p><span>Register Date: </span> {{ user.created_at | date: 'yyyy-MM-dd' }} </p>
-    </div>
+    <div class="col-md-6 mt-3 mb-3">
+      <div class="card-header"><i class="fa fa-address-card" aria-hidden="true"></i> User Register Card</div>
+      <div class="card card-body text-center">
+        <img [src]="user.image == '' ? 'assets/img/usuario-hombre.png' : user.image" class="card-img-top">
+        <hr>
+        <p><span>Full Name: </span> {{ user.fullname == '' ? 'FullName' : user.fullname }} </p>
+        <p><span>Username: </span> {{ user.username == '' ? 'Username' : user.username }} </p>
+        <p><span>Email: </span> {{ user.email == '' ? 'Email' : user.email }} </p>
+        <p><span>Country: </span> {{ user.country == '' ? 'Country' : user.country }} </p>
+        <p><span>Role: </span> {{ user.role == '' ? 'Role' : user.role }} </p>
+        <p><span>Description: </span> {{ user.description == '' ? 'User Description' : user.description }} </p>
+        <p><span>Register Date: </span> {{ user.created_at | date: 'yyyy-MM-dd' }} </p>
+      </div>
+    </div>  
   </div>  
 </div>

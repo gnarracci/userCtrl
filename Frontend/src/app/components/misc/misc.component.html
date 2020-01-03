@@ -1,6 +1,11 @@
+<div class="row">
+  <div class="col-md-12 mt-3 mb-2 text-right">
+    <span><i class="fa fa-user"> Logged as:</i> {{ userlogged.fullname }} </span>
+  </div>
+</div>
 <div class="jumbotron mt-5 mx-auto">
-  <h1 class="display-5">Hello <span id="user"> {{ userlogged.fullname }} </span> !</h1>
-  <p class="lead">In this page you can add/edit/delete roles and countries in the system. </p>
+  <h1 class="display-5"><i class="fa fa-gears"> Roles & Countries Settings</i></h1>
+  <p class="lead"><i class="fa fa-info-circle"></i>  In this page you can add/edit/delete User Roles and countries in the system. </p>
   <hr class="my-4">
   <div class="row">
     <div class="col-md-6">
@@ -22,9 +27,23 @@
       </div>
     </div>
     <div class="col-md-6">
-      <div class="card-header"><span id="rc">Role Table</span></div>
+      <div class="card-header"><span id="rc"> Role Table </span></div>
       <div class="card-body">
-
+        <table class="table table-hover">
+          <thead>
+            <th scope="col">Role</th>
+            <th scope="col">Operations</th>
+          </thead>
+          <tbody>
+            <tr *ngFor="let rol of listRoles">
+              <td scope="row"> {{ rol.role }} </td>
+              <td scope="row">
+                <button class="btn-info" (click)="editRole()"><i class="fa fa-edit"></i></button>
+                <button class="btn-danger" (click)="deleteRole()"><i class="fa fa-trash"></i></button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
   </div>
@@ -47,7 +66,15 @@
     <div class="col-md-6">
       <div class="card-header"><span id="rc"> Countries Table</span></div>
       <div class="card-body">
-        
+        <table class="table table-hover">
+          <thead>
+            <th scope="col">Country</th>
+            <th scope="col">Operations</th>
+          </thead>
+          <tbody>
+
+          </tbody>
+        </table>
       </div>
     </div>
   </div>  

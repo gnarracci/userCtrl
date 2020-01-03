@@ -9,14 +9,11 @@ import { AuthService } from './../../services/auth.service';
 })
 export class NavbarComponent implements OnInit {
 
-  userinfo: any = [];
-
   constructor(public authService: AuthService) { }
 
   // tslint:disable-next-line: variable-name
   public app_name = 'userCtrl';
 
-  ngOnInit() {
-  }
+  ngOnInit() { }
 
 }

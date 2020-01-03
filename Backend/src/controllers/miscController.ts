@@ -5,8 +5,17 @@ import pool from '../database';
 class miscController {
 
     public async viewRole (req: Request, res: Response) {
-        const role = await pool.query("SELECT * FROM role");
-        res.status(200).json(role);
+        const roles = await pool.query("SELECT * FROM role");
+        res.status(200).json(roles);
+    }
+
+    public async getRole (req: Request, res: Response) {
+        const { id } = req.params;
+        const role = await pool.query('SELECT * FROM role WHERE id = ?', [id]);
+        if (role.length > 0) {
+            return res.status(200).json(role[0]);
+        }
+        res.status(404).json({message: "Role doesn't finded!"});
     }
 
     public async addRole (req: Request, res: Response) {

@@ -16,26 +16,29 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `country`
+-- Table structure for table `role`
 --
 
-DROP TABLE IF EXISTS `country`;
+DROP TABLE IF EXISTS `role`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `country` (
-  `id` int(2) NOT NULL AUTO_INCREMENT COMMENT 'Id Country',
-  `country` varchar(30) DEFAULT NULL COMMENT 'Country Name',
+CREATE TABLE `role` (
+  `id` int(2) NOT NULL AUTO_INCREMENT COMMENT 'Id Role',
+  `role` varchar(20) NOT NULL COMMENT 'Role Name',
+  `role_descrip` varchar(100) NOT NULL COMMENT 'Role Description',
+  `modified_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `country`
+-- Dumping data for table `role`
 --
 
-LOCK TABLES `country` WRITE;
-/*!40000 ALTER TABLE `country` DISABLE KEYS */;
-/*!40000 ALTER TABLE `country` ENABLE KEYS */;
+LOCK TABLES `role` WRITE;
+/*!40000 ALTER TABLE `role` DISABLE KEYS */;
+INSERT INTO `role` VALUES (1,'ADMINISTRATOR','All Ops CRUD Granted','2019-12-15 05:42:00'),(2,'USER','Only can Edit your Description','2019-12-16 04:41:39'),(3,'OBSERVER','only can view data but not edit','2019-12-16 05:05:21'),(4,'SUPERUSER','All CRUD Operations / ALL RWX Uses/Roles & Countries','2019-12-25 17:50:29');
+/*!40000 ALTER TABLE `role` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -47,4 +50,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-12-12  2:33:40
+-- Dump completed on 2019-12-29  0:37:58

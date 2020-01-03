@@ -2,16 +2,17 @@ import { Component, OnInit } from '@angular/core';
 
 import { AuthService } from './../../services/auth.service';
 import { Role } from '../../models/role';
-import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-misc',
   templateUrl: './misc.component.html',
   styleUrls: ['./misc.component.scss']
 })
+
 export class MiscComponent implements OnInit {
 
-  userlogged: any = []; 
+  userlogged: any = [];
+  listRoles: any = [];
 
   role: Role = {
     id: 0,
@@ -23,6 +24,7 @@ export class MiscComponent implements OnInit {
 
   ngOnInit() {
     this.dataUser();
+    this.listRole();
   }
 
   dataUser() {
@@ -35,22 +37,30 @@ export class MiscComponent implements OnInit {
     );
   }
 
-  addRole(role: Role) {
-    console.log(this.role);
-    this.authService.addRole(this.role).subscribe(
+  listRole(): any {
+    this.authService.getRoles().subscribe(
       res => {
+        this.listRoles = res;
         console.log(res);
       },
       err => console.error(err)
     );
   }
 
-  resetForm(form?: NgForm) {
-    if (form) {
-      form.reset();
-    }
+  addRole(role: Role) {
+    console.log(this.role);
+    this.authService.addRole(this.role).subscribe(
+      res => {
+        console.log(res);
+      },
+      err => console.error(err),
+      this.listRole()
+    );
   }
-  
+
+  editRole() {
+    
+  }
 
 
 }

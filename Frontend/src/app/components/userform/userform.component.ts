@@ -1,4 +1,4 @@
-import { Component, OnInit, HostBinding } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { User } from './../../models/users';
@@ -9,9 +9,8 @@ import { AuthService } from '../../services/auth.service';
   templateUrl: './userform.component.html',
   styleUrls: ['./userform.component.scss']
 })
-export class UserformComponent implements OnInit {
 
-  @HostBinding('class') classes = 'row';
+export class UserformComponent implements OnInit {
 
   user: User = {
     id: 0,
@@ -27,9 +26,12 @@ export class UserformComponent implements OnInit {
 
   edit = false;
 
+  userlogged: any = [];
+
   constructor(private authService: AuthService, private router: Router, private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
+    this.dataUser();
     const params = this.activatedRoute.snapshot.params;
     if (params.id) {
       this.authService.getUser(params.id)
@@ -61,6 +63,15 @@ export class UserformComponent implements OnInit {
         this.router.navigate(['/dashboard']);
       },
       err => console.error(err)
+    );
+  }
+
+  dataUser() {
+    this.authService.dataUser().subscribe(
+      res => {
+        this.userlogged = res;
+      },
+      err => console.log(err)
     );
   }
 

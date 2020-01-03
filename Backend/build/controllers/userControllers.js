@@ -28,7 +28,7 @@ class UserControllers {
             if (users.length > 0) {
                 return res.json(users[0]);
             }
-            res.status(404).json({ text: "User doesn't exists!" });
+            res.status(404).json({ message: "User doesn't exists!" });
         });
     }
     create(req, res) {
