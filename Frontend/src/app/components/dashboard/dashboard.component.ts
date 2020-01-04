@@ -61,7 +61,7 @@ export class DashboardComponent implements OnInit {
       cancelButtonText: 'No, Cancel!'
     }).then(result => {
       if (result.value) {
-        console.log('Delete');
+        console.log(id);
         Swal.fire('Deleted', 'The User has been deleted!', 'success')
       }
     })

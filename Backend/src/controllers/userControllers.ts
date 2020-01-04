@@ -32,7 +32,7 @@ class UserControllers {
         };
         newUser.password = await hashUser.encryptPassword(newUser.password);
         await pool.query('INSERT INTO users SET ?', [newUser]);
-        res.json({message: 'User was Saved!'});
+        res.status(200).json({message: 'User was Saved!'});
     }
 
     public async update (req: Request, res: Response) {
