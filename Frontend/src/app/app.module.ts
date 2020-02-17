@@ -18,6 +18,7 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { RegisterComponent } from './components/register/register.component';
 import { UserformComponent } from './components/userform/userform.component';
 import { MiscComponent } from './components/misc/misc.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 @NgModule({
@@ -37,7 +38,8 @@ import { MiscComponent } from './components/misc/misc.component';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    BrowserAnimationsModule
   ],
   providers: [AuthService, AuthGuard, {
     provide: HTTP_INTERCEPTORS,
