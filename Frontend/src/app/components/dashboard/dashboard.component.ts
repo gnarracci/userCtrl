@@ -1,7 +1,7 @@
 import { Component, OnInit} from '@angular/core';
+import Swal from 'sweetalert2';
 
 import { AuthService } from '../../services/auth.service';
-import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-dashboard',
@@ -39,30 +39,26 @@ export class DashboardComponent implements OnInit {
     );
   }
 
-  /*deleteUser(id: string) {
-    this.authService.deleteUser(id).subscribe(
-      res => {
-        console.log(res);
-        this.getUsers();
-      },
-      err => console.error(err)
-    );
-  }*/
-  
-  deleteUser(id: string) {
+  deleteUser(id:string) {
     Swal.fire({
-      title: 'Are you sure?',
-      text: "You won't to be able to revert this action!",
+      title:'Are you sure?',
+      text: "You won't be able to revert this!",
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes, delete it!',
-      cancelButtonText: 'No, Cancel!'
+      confirmButtonText: 'Yes, delete it!'
     }).then(result => {
       if (result.value) {
-        console.log('Delete');
-        Swal.fire('Deleted', 'The User has been deleted!', 'success')
+        //Want Delete
+        this.authService.deleteUser(id).subscribe(
+          res => {
+            console.log(res);
+            this.getUsers();
+          },
+          err => Swal.fire('Error!', 'Something went wrong!', 'error')
+        );
+        Swal.fire('Deletes!', 'User selected has been deleted!.', 'success')
       }
     })
   }

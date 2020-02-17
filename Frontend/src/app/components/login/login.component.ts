@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 import { User } from './../../models/users';
 import { AuthService } from '../../services/auth.service';
@@ -21,11 +22,18 @@ export class LoginComponent implements OnInit {
   loginUser(user: User) {
     this.authService.loginUser(this.user).subscribe(
       res => {
+        Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          title: 'Login Successfull!',
+          showConfirmButton: false,
+          timer: 2000
+        })
         console.log(res);
         localStorage.setItem('token', res.token);
         this.router.navigate(['/profile']);
-      },
-      err => console.error(err));
+      }),
+      err => Swal.fire('Error!', 'Something went wrong!', 'error');
     this.router.navigate(['/login']);
 
   }

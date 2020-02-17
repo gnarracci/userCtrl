@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import Swal from 'sweetalert2';
 
 import { AuthService } from './../../services/auth.service';
 import { Role } from '../../models/role';

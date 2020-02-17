@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 import { User } from './../../models/users';
 import { AuthService } from '../../services/auth.service';
@@ -33,10 +34,16 @@ export class RegisterComponent implements OnInit {
     delete this.user.created_at;
     this.authService.registerUser(this.user).subscribe(
       res => {
-        console.log(res);
+        Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          title: 'New User was Registered!',
+          showConfirmButton: false,
+          timer: 2500
+        })
         this.router.navigate(['/profile']);
       },
-      err => console.error(err)
+      err => Swal.fire('Error!', 'Something went wrong!', 'error')
     );
   }
 
