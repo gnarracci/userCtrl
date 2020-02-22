@@ -24,7 +24,7 @@ class AuthControllers {
                     username: req.body.username,
                     password: req.body.password
                 };
-                const expireIn = 60 * 60 * 3; //7200 ms = 3 hrs
+                const expireIn = 60 * 60 * 4; //14400 ms = 4 hrs
                 const search = yield database_1.default.query("SELECT * FROM users WHERE username = ?", [userData.username]);
                 if (search.length > 0) { /*console.log(search[0].username);*/ }
                 else {

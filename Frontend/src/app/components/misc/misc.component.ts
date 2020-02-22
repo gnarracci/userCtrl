@@ -48,13 +48,19 @@ export class MiscComponent implements OnInit {
     );
   }
 
-  addRole(role: Role) {
+  saveNewRole(role: Role) {
     console.log(this.role);
     this.authService.addRole(this.role).subscribe(
       res => {
-        console.log(res);
+        Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          title: 'New Role was Registered!',
+          showConfirmButton: false,
+          timer: 2500
+        })
       },
-      err => console.error(err),
+      err => Swal.fire('Error!', 'Something went wrong!', 'error'),
       this.listRole()
     );
   }
