@@ -14,6 +14,7 @@ export class MiscComponent implements OnInit {
 
   userlogged: any = [];
   listRoles: any = [];
+  listCountries: any = [];
 
   role: Role = {
     id: 0,
@@ -46,6 +47,10 @@ export class MiscComponent implements OnInit {
       },
       err => console.error(err)
     );
+  }
+
+  resetForm() {
+    
   }
 
   saveNewRole(role: Role) {

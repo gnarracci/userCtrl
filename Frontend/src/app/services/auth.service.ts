@@ -10,7 +10,10 @@ import { Role } from '../models/role';
 @Injectable({
   providedIn: 'root'
 })
+
 export class AuthService {
+
+  selectedUser: User;
 
   API_URI = 'http://localhost:3000/api';
 

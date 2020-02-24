@@ -36,8 +36,9 @@ class miscController {
                 role: req.body.role,
                 role_descrip: req.body.role_descrip
             };
-            yield database_1.default.query("INSERT INTO role SET ?", [newRole]);
-            res.status(200).json({ message: 'Role Saved!' });
+            console.log(newRole);
+            /*await pool.query("INSERT INTO role SET ?", [newRole]);
+            res.status(200).json({message: 'Role Saved!'});*/
         });
     }
     editRole(req, res) {
