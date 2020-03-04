@@ -10,6 +10,7 @@ const authRoutes_1 = __importDefault(require("./routes/authRoutes"));
 const registerRoutes_1 = __importDefault(require("./routes/registerRoutes"));
 const userRoutes_1 = __importDefault(require("./routes/userRoutes"));
 const miscRoutes_1 = __importDefault(require("./routes/miscRoutes"));
+const miscCountryRoutes_1 = __importDefault(require("./routes/miscCountryRoutes"));
 class Server {
     constructor() {
         this.app = express_1.default();
@@ -26,6 +27,7 @@ class Server {
     routes() {
         this.app.use('/api/users', userRoutes_1.default);
         this.app.use('/api/ext/misc', miscRoutes_1.default);
+        this.app.use('/api/ext/country', miscCountryRoutes_1.default);
         this.app.use('/api/auth/login', authRoutes_1.default);
         this.app.use('/api/auth/profile', authRoutes_1.default);
         this.app.use('/api/auth/register', registerRoutes_1.default);

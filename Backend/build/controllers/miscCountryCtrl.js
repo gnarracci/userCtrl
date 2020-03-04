@@ -13,54 +13,52 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const database_1 = __importDefault(require("../database"));
-class miscController {
-    // Roles
-    viewRole(req, res) {
+class miscCountryCtrl {
+    // Countries
+    viewCounties(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const roles = yield database_1.default.query("SELECT * FROM role");
-            res.status(200).json(roles);
+            const countries = yield database_1.default.query("SELECT * FROM country");
+            res.status(200).json(countries);
         });
     }
-    getRole(req, res) {
+    getCountry(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const { id } = req.params;
-            const role = yield database_1.default.query('SELECT * FROM role WHERE id = ?', [id]);
-            if (role.length > 0) {
-                return res.status(200).json(role[0]);
+            const country = yield database_1.default.query("SELECT * FROM country WHERE id = ?", [id]);
+            if (country.length > 0) {
+                return res.status(200).json(country[0]);
             }
-            res.status(404).json({ message: "Role doesn't finded!" });
+            res.status(404).json({ message: "Country doesn't finded!" });
         });
     }
-    addRole(req, res) {
+    addCountry(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const newRole = {
-                role: req.body.role,
-                role_descrip: req.body.role_descrip
+            const newCountry = {
+                country: req.body.country
             };
-            console.log(newRole);
-            /*await pool.query("INSERT INTO role SET ?", [newRole]);
-            res.status(200).json({message: 'Role Saved!'});*/
+            console.log(newCountry);
+            /*await pool.query("INSERT INTO country SET ?", [newCountry]);
+            res.status(200).json({message: "Country Added!"});*/
         });
     }
-    editRole(req, res) {
+    editCountry(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const { id } = req.params;
-            const updateRole = {
-                role: req.body.role,
-                role_descrip: req.body.role_descrip
+            const updateCountry = {
+                country: req.body.country
             };
-            yield database_1.default.query("UPDATE role SET ? WHERE id = ?", [updateRole, id]);
-            res.status(200).json({ message: 'Role Updated!' });
+            yield database_1.default.query("UPDATE country SET ? WHERE id = ?", [updateCountry, id]);
+            res.status(200).json({ message: "Country Updated!" });
         });
     }
-    deleteRole(req, res) {
+    deleteCountry(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const { id } = req.params;
-            yield database_1.default.query("DELETE FROM role WHERE id = ?", [id]);
-            res.status(200).json({ message: 'Role Deleted!' });
+            yield database_1.default.query("DELETE FROM country WHERE id = ?", [id]);
+            res.status(200).json({ message: "Country Deleted!" });
         });
     }
 }
-exports.miscControllers = new miscController();
-exports.default = miscController;
-//# sourceMappingURL=miscController.js.map
+exports.miscCountryCtrls = new miscCountryCtrl();
+exports.default = miscCountryCtrl;
+//# sourceMappingURL=miscCountryCtrl.js.map

@@ -7,6 +7,7 @@ import authRoutes from './routes/authRoutes';
 import registerRoutes from './routes/registerRoutes';
 import userRoutes from './routes/userRoutes';
 import miscRoutes from './routes/miscRoutes';
+import miscCountryRoutes from './routes/miscCountryRoutes';
 
 class Server {
 
@@ -29,6 +30,7 @@ class Server {
     routes(): void {
         this.app.use('/api/users', userRoutes);
         this.app.use('/api/ext/misc', miscRoutes);
+        this.app.use('/api/ext/country', miscCountryRoutes);
         this.app.use('/api/auth/login', authRoutes);
         this.app.use('/api/auth/profile', authRoutes);
         this.app.use('/api/auth/register', registerRoutes);

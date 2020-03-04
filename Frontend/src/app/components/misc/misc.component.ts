@@ -3,6 +3,8 @@ import Swal from 'sweetalert2';
 
 import { AuthService } from './../../services/auth.service';
 import { Role } from '../../models/role';
+import { Country } from '../../models/country';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-misc',
@@ -22,11 +24,17 @@ export class MiscComponent implements OnInit {
     role_descrip: ''
   }
 
+  country: Country = {
+    id: 0,
+    country: ''
+  }
+
   constructor(private authService: AuthService) { }
 
   ngOnInit() {
     this.dataUser();
     this.listRole();
+    this.listCountry();
   }
 
   dataUser() {
@@ -49,8 +57,14 @@ export class MiscComponent implements OnInit {
     );
   }
 
-  resetForm() {
-    
+  listCountry(): any {
+    this.authService.viewCountries().subscribe(
+      res => {
+        this.listCountries = res;
+        console.log(res);
+      },
+      err => console.error(err)
+    );
   }
 
   saveNewRole(role: Role) {
@@ -63,16 +77,32 @@ export class MiscComponent implements OnInit {
           title: 'New Role was Registered!',
           showConfirmButton: false,
           timer: 2500
-        })
+        }),
+        this.listRole();   
       },
-      err => Swal.fire('Error!', 'Something went wrong!', 'error'),
-      this.listRole()
+      err => Swal.fire('Error!', 'Something went wrong!', 'error')
     );
   }
 
-  editRole() {
-    
+  saveNewCountry(country: Country) {
+    console.log(this.country);
+    this.authService.addCountry(this.country).subscribe(
+      res => {
+        Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          title: 'New Country is Added!',
+          showConfirmButton: false,
+          timer: 2500
+        }),
+        this.listCountry();
+      },
+      err => Swal.fire('Error', 'Something went wrong!', 'error')
+    );
   }
 
+  formReset(form?: NgForm) {
+    form.reset();
+  }
 
 }

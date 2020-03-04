@@ -6,14 +6,13 @@ import { Observable } from 'rxjs';
 
 import { User } from '../models/users';
 import { Role } from '../models/role';
+import { Country } from '../models/country';
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class AuthService {
-
-  selectedUser: User;
 
   API_URI = 'http://localhost:3000/api';
 
@@ -66,6 +65,8 @@ export class AuthService {
 
     // Misc
 
+    // Roles
+
     addRole(role: Role) {
       return this.http.post(`${this.API_URI}/ext/misc`, role);
     }
@@ -76,6 +77,20 @@ export class AuthService {
 
     getRole (id: string) {
       return this.http.get(`${this.API_URI}/ext/misc/${id}`);
+    }
+
+    // Countries
+
+    addCountry(country: Country) {
+      return this.http.post(`${this.API_URI}/ext/country`, country);
+    }
+
+    viewCountries() {
+      return this.http.get(`${this.API_URI}/ext/country`);
+    }
+
+    getCountry(id: string) {
+      return this.http.get(`${this.API_URI}/ext/country/${id}`);
     }
 
 }

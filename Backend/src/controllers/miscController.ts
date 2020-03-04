@@ -4,6 +4,8 @@ import pool from '../database';
 
 class miscController {
 
+    // Roles
+
     public async viewRole (req: Request, res: Response) {
         const roles = await pool.query("SELECT * FROM role");
         res.status(200).json(roles);
@@ -42,7 +44,7 @@ class miscController {
         const { id } = req.params;
         await pool.query("DELETE FROM role WHERE id = ?", [id]);
         res.status(200).json({message: 'Role Deleted!'});
-    }
+    }    
 
 }
 
