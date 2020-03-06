@@ -12,6 +12,8 @@ class MiscCounRoutes {
         this.router.get('/', validateToken_1.TokenValidation, miscCountryCtrl_1.miscCountryCtrls.viewCounties);
         this.router.get('/:id', validateToken_1.TokenValidation, miscCountryCtrl_1.miscCountryCtrls.getCountry);
         this.router.post('/', validateToken_1.TokenValidation, miscCountryCtrl_1.miscCountryCtrls.addCountry);
+        this.router.put('/:id', validateToken_1.TokenValidation, miscCountryCtrl_1.miscCountryCtrls.editCountry);
+        this.router.delete('/:id', validateToken_1.TokenValidation, miscCountryCtrl_1.miscCountryCtrls.deleteCountry);
     }
 }
 const miscCounRoutes = new MiscCounRoutes();

@@ -101,8 +101,32 @@ export class MiscComponent implements OnInit {
     );
   }
 
+  deleteCountry(id:string) {
+    Swal.fire({
+      title:'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!'
+    }).then(result => {
+      if (result.value) {
+        //Want Delete
+        this.authService.deleteCountry(id).subscribe(
+          res => {
+            console.log(res);
+            this.listCountry();
+          },
+          err => Swal.fire('Error!', 'Something went wrong!', 'error')
+        );
+        Swal.fire('Deletes!', 'Country selected has been deleted!.', 'success')
+      }
+    })
+  }
+
   formReset(form?: NgForm) {
-    form.reset();
+    this.formReset();
   }
 
 }

@@ -4,7 +4,7 @@
   </div>
 </div>
 <div class="jumbotron mt-5 mx-auto">
-  <h1 class="display-5"><i class="fa fa-gears"> Roles & Countries Settings</i></h1>
+  <h1 class="display-5"><i class="fa fa-gears"></i> Roles & Countries Settings</h1>
   <p class="lead"><i class="fa fa-info-circle"></i>  In this page you can add/edit/delete User Roles and countries in the system. </p>
   <hr class="my-4">
   <div class="row">
@@ -15,7 +15,7 @@
   <hr class="my-4">
 
   <div class="row">
-    <div class="col-md-5">
+    <div class="col-md-4">
       <div class="card">
         <div class="card-header"><i class="fa fa-dashcube"></i> Add Role</div>
         <div class="card-body">
@@ -34,19 +34,23 @@
         </div>
       </div>
     </div>
-    <div class="col-md-7">
+    <div class="col-md-8">
       <div class="card">
         <div class="card-header"><i class="fa fa-dashcube"></i> Role List</div>
       <div class="card-body">
       <table class="table table-condensed table-bordered table-responsive-md table-striped">
         <thead>
+          <th>Id</th>
           <th>Role</th>
-          <th>Description</th>
+          <th>Descrip</th>
+          <th>Ops</th>
         </thead>
         <tbody>
           <tr *ngFor="let rol of listRoles">
+            <td> {{ rol.id }} </td>
             <td> {{ rol.role }} </td>
             <td> {{ rol.role_descrip }} </td>
+            <td><button class="btn btn-primary btn-block btn-lg"><i class="fa fa-edit"></i></button><button class="btn btn-danger btn-block btn-lg"><i class="fa fa-trash"></i></button></td>
           </tr>
         </tbody>
       </table>
@@ -64,7 +68,7 @@
   <hr class="my-4">
 
   <div class="row">
-    <div class="col-md-7">
+    <div class="col-md-8">
       <div class="card">
         <div class="card-header"><i class="fa fa-chevron-up"></i> Countries List</div>
         <div class="card-body">
@@ -72,25 +76,28 @@
             <thead>
               <th>Id</th>
               <th>Country</th>
+              <th>Ops</th>
             </thead>
             <tbody>
               <tr *ngFor="let ctry of listCountries">
                 <td> {{ ctry.id }} </td>
                 <td> {{ ctry.country }} </td>
+                <td><button class="btn btn-primary btn-block btn-lg"><i class="fa fa-edit"></i></button>
+                <button class="btn btn-danger btn-block btn-lg" (click)="deleteCountry(ctry.id)" ><i class="fa fa-trash"></i></button></td>
               </tr>
             </tbody>
           </table>
         </div>
       </div>
     </div>
-    <div class="col-md-5">
+    <div class="col-md-4">
       <div class="card">
         <div class="card-header"><i class="fa fa-chevron-up"></i> Add Country</div>
         <div class="card-body">
-          <form #countryForm="ngForm" (submit)="saveNewCountry()">
+          <form #formCountry=ngForm (submit)="saveNewCountry()">
             <div class="form-group">
               <label for="country">Country</label>
-              <input type="text" name="country" id="country" class="form-control" [(ngModel)]="country.country" placeholder="enter country name">
+              <input type="text" name="country" id="country" class="form-control" [(ngModel)]="country.country" placeholder="country name">
             </div>
             <button type="submit" class="btn btn-primary btn-lg btn-block"><i class="fa fa-plus-circle"></i> Add Country</button>
             <button type="reset" class="btn btn-outline-primary btn-lg btn-block"><i class="fa fa-refresh"></i> Reset</button>

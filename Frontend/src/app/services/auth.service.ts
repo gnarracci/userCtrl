@@ -93,4 +93,8 @@ export class AuthService {
       return this.http.get(`${this.API_URI}/ext/country/${id}`);
     }
 
+    deleteCountry(id: string) {
+      return this.http.delete(`${this.API_URI}/ext/country/${id}`);
+    }
+
 }

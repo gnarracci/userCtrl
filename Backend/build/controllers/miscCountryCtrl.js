@@ -37,8 +37,8 @@ class miscCountryCtrl {
                 country: req.body.country
             };
             console.log(newCountry);
-            /*await pool.query("INSERT INTO country SET ?", [newCountry]);
-            res.status(200).json({message: "Country Added!"});*/
+            yield database_1.default.query("INSERT INTO country SET ?", [newCountry]);
+            res.status(200).json({ message: "Country Added!" });
         });
     }
     editCountry(req, res) {

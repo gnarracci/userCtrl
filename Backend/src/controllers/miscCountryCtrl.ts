@@ -25,8 +25,8 @@ class miscCountryCtrl {
             country: req.body.country
         }
         console.log(newCountry);
-        /*await pool.query("INSERT INTO country SET ?", [newCountry]);
-        res.status(200).json({message: "Country Added!"});*/
+        await pool.query("INSERT INTO country SET ?", [newCountry]);
+        res.status(200).json({message: "Country Added!"});
     }
 
     public async editCountry (req: Request, res: Response) {
