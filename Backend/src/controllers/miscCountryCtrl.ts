@@ -29,7 +29,7 @@ class miscCountryCtrl {
         res.status(200).json({message: "Country Added!"});
     }
 
-    public async editCountry (req: Request, res: Response) {
+    public async updateCountry (req: Request, res: Response) {
         const { id } = req.params;
         const updateCountry = {
             country: req.body.country

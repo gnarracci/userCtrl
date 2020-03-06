@@ -15,6 +15,8 @@ class MiscRoutes {
         this.router.get('/', TokenValidation, miscControllers.viewRole);
         this.router.get('/:id', TokenValidation, miscControllers.getRole);
         this.router.post('/', TokenValidation, miscControllers.addRole);
+        this.router.put('/:id', TokenValidation, miscControllers.updateRole);
+        this.router.delete('/:id', TokenValidation, miscControllers.deleteRole);
     }
 
 }

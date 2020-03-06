@@ -26,11 +26,11 @@ class miscController {
             role_descrip: req.body.role_descrip
         };
         console.log(newRole);
-        /*await pool.query("INSERT INTO role SET ?", [newRole]);
-        res.status(200).json({message: 'Role Saved!'});*/
+        await pool.query("INSERT INTO role SET ?", [newRole]);
+        res.status(200).json({message: 'Role Saved!'});
     }
 
-    public async editRole (req: Request, res: Response) {
+    public async updateRole (req: Request, res: Response) {
         const { id } = req.params;
         const updateRole = {
             role: req.body.role,

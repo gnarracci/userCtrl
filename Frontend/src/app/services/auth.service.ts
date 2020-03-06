@@ -79,6 +79,14 @@ export class AuthService {
       return this.http.get(`${this.API_URI}/ext/misc/${id}`);
     }
 
+    updateRole(id: string | number, updatedRole: Role) {
+      return this.http.put(`${this.API_URI}/ext/misc/${id}`, updatedRole);
+    }
+
+    deleteRole(id: string) {
+      return this.http.delete(`${this.API_URI}/ext/misc/${id}`);
+    }
+
     // Countries
 
     addCountry(country: Country) {
@@ -91,6 +99,10 @@ export class AuthService {
 
     getCountry(id: string) {
       return this.http.get(`${this.API_URI}/ext/country/${id}`);
+    }
+
+    updateCountry(id: string | number, updatedCountry) {
+      return this.http.put(`${this.API_URI}/ext/country${id}`, updatedCountry);
     }
 
     deleteCountry(id: string) {

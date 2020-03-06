@@ -41,7 +41,7 @@ class miscCountryCtrl {
             res.status(200).json({ message: "Country Added!" });
         });
     }
-    editCountry(req, res) {
+    updateCountry(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const { id } = req.params;
             const updateCountry = {

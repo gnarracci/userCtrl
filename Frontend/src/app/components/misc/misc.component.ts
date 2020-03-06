@@ -4,7 +4,6 @@ import Swal from 'sweetalert2';
 import { AuthService } from './../../services/auth.service';
 import { Role } from '../../models/role';
 import { Country } from '../../models/country';
-import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-misc',
@@ -78,6 +77,7 @@ export class MiscComponent implements OnInit {
           showConfirmButton: false,
           timer: 2500
         }),
+        this.role = {},
         this.listRole();   
       },
       err => Swal.fire('Error!', 'Something went wrong!', 'error')
@@ -95,10 +95,35 @@ export class MiscComponent implements OnInit {
           showConfirmButton: false,
           timer: 2500
         }),
+        this.country = {},
         this.listCountry();
       },
       err => Swal.fire('Error', 'Something went wrong!', 'error')
     );
+  }
+
+  deleteRole(id: string) {
+    Swal.fire({
+      title:'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!'
+    }).then(result => {
+      if (result.value) {
+        //Want Delete
+        this.authService.deleteRole(id).subscribe(
+          res => {
+            console.log(res);
+            this.listRole();
+          },
+          err => Swal.fire('Error!', 'Something went wrong!', 'error')
+        );
+        Swal.fire('Deletes!', 'Role selected has been deleted!.', 'success')
+      }
+    })
   }
 
   deleteCountry(id:string) {
@@ -123,10 +148,6 @@ export class MiscComponent implements OnInit {
         Swal.fire('Deletes!', 'Country selected has been deleted!.', 'success')
       }
     })
-  }
-
-  formReset(form?: NgForm) {
-    this.formReset();
   }
 
 }

@@ -22,7 +22,7 @@
           <form (submit)="saveNewRole()">
             <div class="form-group">
               <label for="role">Role</label>
-              <input type="text" name="role" id="role" class="form-control" [(ngModel)]="role.role" placeholder="enter role name">
+              <input type="text" name="role" id="role" class="form-control" [(ngModel)]="role.role" placeholder="role name">
             </div>
             <div class="form-group">
               <label for="role_descrip">Role Description</label>
@@ -50,7 +50,8 @@
             <td> {{ rol.id }} </td>
             <td> {{ rol.role }} </td>
             <td> {{ rol.role_descrip }} </td>
-            <td><button class="btn btn-primary btn-block btn-lg"><i class="fa fa-edit"></i></button><button class="btn btn-danger btn-block btn-lg"><i class="fa fa-trash"></i></button></td>
+            <td><button (click)="updateRole(rol.id)" class="btn btn-primary btn-block btn-lg"><i class="fa fa-edit"></i></button>
+            <button (click)="deleteRole(rol.id)" class="btn btn-danger btn-block btn-lg"><i class="fa fa-trash"></i></button></td>
           </tr>
         </tbody>
       </table>
@@ -82,7 +83,7 @@
               <tr *ngFor="let ctry of listCountries">
                 <td> {{ ctry.id }} </td>
                 <td> {{ ctry.country }} </td>
-                <td><button class="btn btn-primary btn-block btn-lg"><i class="fa fa-edit"></i></button>
+                <td><button class="btn btn-primary btn-block btn-lg" (click)="updateCountry(ctry.id)" ><i class="fa fa-edit"></i></button>
                 <button class="btn btn-danger btn-block btn-lg" (click)="deleteCountry(ctry.id)" ><i class="fa fa-trash"></i></button></td>
               </tr>
             </tbody>
@@ -94,7 +95,7 @@
       <div class="card">
         <div class="card-header"><i class="fa fa-chevron-up"></i> Add Country</div>
         <div class="card-body">
-          <form #formCountry=ngForm (submit)="saveNewCountry()">
+          <form (submit)="saveNewCountry()">
             <div class="form-group">
               <label for="country">Country</label>
               <input type="text" name="country" id="country" class="form-control" [(ngModel)]="country.country" placeholder="country name">
@@ -106,5 +107,6 @@
       </div>
     </div>
   </div>
+  <hr class="my-4">
 
 </div>
