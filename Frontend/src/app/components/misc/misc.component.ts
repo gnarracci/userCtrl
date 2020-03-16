@@ -67,39 +67,81 @@ export class MiscComponent implements OnInit {
   }
 
   saveNewRole(role: Role) {
-    console.log(this.role);
-    this.authService.addRole(this.role).subscribe(
-      res => {
-        Swal.fire({
-          position: 'top-end',
-          icon: 'success',
-          title: 'New Role was Registered!',
-          showConfirmButton: false,
-          timer: 2500
-        }),
-        this.role = {},
-        this.listRole();   
-      },
-      err => Swal.fire('Error!', 'Something went wrong!', 'error')
-    );
+    if (this.role.id == 0) {
+      console.log(this.role);
+      delete this.role.id;
+      this.authService.addRole(this.role).subscribe(
+        res => {
+          Swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: 'New Role was Registered!',
+            showConfirmButton: false,
+            timer: 2500
+          }),
+          this.role = {},
+          this.listRole();   
+        },
+        err => Swal.fire('Error!', 'Something went wrong!', 'error')
+      );
+    } else {
+      // Want Update
+      console.log(this.role);
+      console.log(this.role.id);
+      this.authService.updateRole(this.role.id, this.role).subscribe(
+        res => {
+          Swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: 'Role was Updated!',
+            showConfirmButton: false,
+            timer: 2500
+          }),
+          this.role = {},
+          console.log(res);
+        },
+        err => Swal.fire('Error!', 'Something went wrong!', 'error')
+       );      
+    }
   }
-
-  saveNewCountry(country: Country) {
-    console.log(this.country);
-    this.authService.addCountry(this.country).subscribe(
-      res => {
-        Swal.fire({
-          position: 'top-end',
-          icon: 'success',
-          title: 'New Country is Added!',
-          showConfirmButton: false,
-          timer: 2500
-        }),
-        this.country = {},
-        this.listCountry();
+  
+  saveNewCountry(country: Country, ctry: Country) {
+    if (this.country.id == 0) {
+      console.log(this.country);
+        delete this.country.id;
+        this.authService.addCountry(this.country).subscribe(
+          res => {
+            Swal.fire({
+              position: 'top-end',
+              icon: 'success',
+              title: 'New Country is Added!',
+              showConfirmButton: false,
+              timer: 2500
+            }),
+            this.country = {},
+            this.listCountry();
       },
       err => Swal.fire('Error', 'Something went wrong!', 'error')
     );
+    } else {
+      // Want Update
+      console.log(this.country);
+      console.log(this.country.id);
+      this.authService.updateCountry(this.country.id, this.country).subscribe(
+        res => {
+          Swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: 'Country was Updated!',
+            showConfirmButton: false,
+            timer: 2500
+          }),
+          this.country = {},
+          console.log(res);
+        },
+        err => Swal.fire('Error!', 'Something went wrong!', 'error')
+      );
+      }
   }
 
   deleteRole(id: string) {
@@ -148,6 +190,15 @@ export class MiscComponent implements OnInit {
         Swal.fire('Deletes!', 'Country selected has been deleted!.', 'success')
       }
     })
+  }
+
+  updateRole(rol: Role) {
+    this.role = rol;
+  }
+
+  updateCountry(ctry: Country) {
+    this.country = ctry;
+    console.log(ctry.id);
   }
 
 }

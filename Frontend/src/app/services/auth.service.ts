@@ -63,7 +63,7 @@ export class AuthService {
       this.router.navigate(['/login']);
     }
 
-    // Misc
+    // Ops Misc
 
     // Roles
 
@@ -102,7 +102,7 @@ export class AuthService {
     }
 
     updateCountry(id: string | number, updatedCountry) {
-      return this.http.put(`${this.API_URI}/ext/country${id}`, updatedCountry);
+      return this.http.put(`${this.API_URI}/ext/country/${id}`, updatedCountry);
     }
 
     deleteCountry(id: string) {

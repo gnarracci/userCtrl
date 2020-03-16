@@ -4,6 +4,8 @@ import Swal from 'sweetalert2';
 
 import { User } from './../../models/users';
 import { AuthService } from '../../services/auth.service';
+import { Role } from './../../models/role';
+import { Country } from './../../models/country';
 
 @Component({
   selector: 'app-userform',
@@ -25,6 +27,17 @@ export class UserformComponent implements OnInit {
     created_at: new Date()
   };
 
+  listRoles: Role = {
+    id: 0,
+    role: '',
+    role_descrip: ''
+  }
+
+  listCountries: Country = {
+    id: 0,
+    country: ''
+  }
+
   edit = false;
 
   userlogged: any = [];
@@ -33,6 +46,8 @@ export class UserformComponent implements OnInit {
 
   ngOnInit() {
     this.dataUser();
+    this.listRole();
+    this.listCountry();
     const params = this.activatedRoute.snapshot.params;
     if (params.id) {
       this.authService.getUser(params.id)
@@ -44,6 +59,26 @@ export class UserformComponent implements OnInit {
         err => console.error(err)
       );
     }
+  }
+
+  listRole(): any {
+    this.authService.getRoles().subscribe(
+      res => {
+        this.listRoles = res;
+        console.log(res);
+      },
+      err => console.error(err)
+    );
+  }
+
+  listCountry(): any {
+    this.authService.viewCountries().subscribe(
+      res => {
+        this.listCountries = res;
+        console.log(res);
+      },
+      err => console.error(err)
+    );
   }
 
   saveNewUser() {
