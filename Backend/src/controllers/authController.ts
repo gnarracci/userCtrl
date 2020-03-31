@@ -15,7 +15,7 @@ class AuthControllers {
                 username: req.body.username,
                 password: req.body.password
             }
-            const expireIn = 60 * 60 * 4 //14400 ms = 4 hrs
+            const expireIn = 60 * 60 * 5 // 18000 ms = 5 hrs
             const search = await pool.query("SELECT * FROM users WHERE username = ?", [userData.username]);
             if (search.length > 0) { /*console.log(search[0].username);*/ } else { res.status(404).json({message: 'Username is Wrong!'}); }
             const userPassStored = search[0].password;
@@ -32,11 +32,8 @@ class AuthControllers {
 
     public async profile (req: Request, res: Response) {
         const userData = await pool.query("SELECT * FROM users WHERE id = ?", [req.userId]);
-        if (userData.length > 0) {
-            res.status(200).json(userData[0]);
-        }
-    }
-
+        if (userData.length > 0) return res.status(200).json(userData[0]);
+    }    
 }
 
 export const AuthController = new AuthControllers();

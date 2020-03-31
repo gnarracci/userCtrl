@@ -1,31 +1,53 @@
 <div class="row">
     <div class="col-md-12 mt-3 mb-2 text-right">
       <span><i class="fa fa-user"> Logged as:</i> {{ userlogged.fullname }} </span>
+      <br>
+      <span><i class="fa fa-adn"> your role is: </i> {{ userlogged.role }} </span>
     </div>
 </div>
-<hr class="my-4">
-<div class="row">
-    <div class="col-md-6 mt-3 mb-3">
-        <div class="jumbotron mt-3 mx-auto">
-            <h1 class="display-5"><i class="fa fa-user-circle-o"></i> Welcome</h1>
-            <h2 class="display-5 mx-auto"><span style="text-shadow: 1px 1px;"> {{ userlogged.fullname }} </span></h2>
-            <p class="lead">Only Role Administrator can view all data in the system but only edit your own description.</p>
-            <hr class="my-4">
-            <p><i class="fa fa-user-circle"></i> User: {{ userlogged.fullname }} </p>
-            <p><i class="fa fa-user-secret"></i> Role:<span style="text-shadow: 1px 1px;"> {{ userlogged.role }} </span></p>
-            <p><i class="fa fa-star"></i> Country: {{ userlogged.country }} </p>
-            <p><i class="fa fa-book"></i> Description: {{ userlogged.description }} </p> 
-            <p><i class="fa fa-calendar-plus-o"></i> Created: {{ userlogged.created_at | date: 'MM-dd-yyyy' }} </p>
-            <p><i class="fa fa-calendar-check-o"></i> Updated: {{ userlogged.updated_at | date: 'MM-dd-yyyy' }} </p>
-            <hr class="my-4">
-            <button class="btn-primary btn-block btn-lg" (click)="showModal()"><i class="fa fa-book"></i> Edit Description</button>
+<div class="jumbotron mt-5 mx-auto">
+    <hr class="my-4">
+    <h1 class="display-5"><i class="fa fa-user-circle-o"></i> Welcome <span>  {{ userlogged.fullname }} </span></h1>
+    <p class="lead">Only Role Administrator can view all data in the system but only edit your own description.</p>
+    <hr class="my-4">
+    <div class="row">
+        <div class="col-md-12 mx-auto">
+            <h3 class="display-5 text-center"><i class="fa fa-user"></i> User Info </h3>
         </div>
     </div>
-      <div class="col-md-6 mt-3 mb-3">
-          <div class="card-header"><i class="fa fa-address-card" aria-hidden="true"></i> User Id Card <span> {{ userlogged.fullname }} </span> </div>
-          <div class="card card-body text-left">
-              <img [src]="userlogged.image == '' ? 'assets/img/usuario-hombre.png' : userlogged.image" class="card-img-top">
-          </div>
-      </div>
+    <hr class="my-4">
+
+    <div class="row">
+        <div class="col-md-5">
+            <div class="card">
+                <div class="card-header"><i class="fa fa-user"></i> User Details </div>
+                <div class="card-body">
+                    <p><i class="fa fa-user-circle"></i> User: {{ userlogged.username }} </p>
+                    <hr class="my-4">
+                    <p><i class="fa fa-star"></i> Country: {{ userlogged.country }} </p>
+                    <hr class="my-4">
+                    <p><i class="fa fa-book"></i> Description: {{ userlogged.description }} </p>
+                    <hr class="my-4">
+                    <p><i class="fa fa-calendar-plus-o"></i> Created: {{ userlogged.created_at | date: 'MM-dd-yyyy' }} </p>
+                    <hr class="my-4">
+                    <p><i class="fa fa-calendar-check-o"></i> Updated: {{ userlogged.updated_at | date: 'MM-dd-yyyy' }} </p>
+                    <hr class="my-4">
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-7">
+            <div class="card">
+                <div class="card-header"><i class="fa fa-address-card" aria-hidden="true"></i> User Id Card: <span> {{ userlogged.fullname }} </span> </div>
+                <div class="card card-body text-left">
+                    <img [src]="userlogged.image == '' ? 'assets/img/usuario-hombre.png' : userlogged.image" class="card-img-top">
+                    <hr class="my-4">
+                    <p class="text-center"><i class="fa fa-adn" aria-hidden="true"></i> Role: <span> {{ userlogged.role }} </span></p>
+                </div>
+            </div>            
+        </div>
+    </div>
+    <hr class="my-4">
+    <button class="btn btn-primary btn-block btn-lg" routerLink="/userlist"><i class="fa fa-list"></i> Show User List </button>
+    <hr class="my-4">
 </div>
-<hr class="my-4">

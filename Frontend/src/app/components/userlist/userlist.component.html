@@ -1,0 +1,31 @@
+<div class="row">
+  <div class="col-md-12 mt-3 mb-2 text-right">
+    <span><i class="fa fa-user"> Logged as:</i> {{ userlogged.fullname }} </span>
+    <br>
+    <span><i class="fa fa-adn"> your role is: </i> {{ userlogged.role }} </span>
+  </div>
+</div>
+<div class="jumbotron mt-5 mx-auto">
+  <hr class="my-4">
+  <h1 class="display-5"><i class="fa fa-list"></i> Users Registered List </h1>
+  <hr class="my-4">
+  <div class="row">
+    <div class="col-md-4 mt-3 mx-auto" *ngFor="let users of listUsers">
+      <div class="card-header bg-dark text-white d-flex justify-content-between align-items-md-start usrn">
+        <i class="fa fa-id-card"></i> {{ users.fullname }}
+      </div>
+      <div class="card card-body text-left">
+        <img [src]="users.image == '' ? 'assets/img/usuario-hombre.png' : users.image" class="card-img-top">
+        <hr class="my-4">
+        <p><span><i class="fa fa-id-card"></i> Id: </span> {{ users.id }} </p>
+        <hr class="my-4">
+        <p><span><i class="fa fa-user-circle"></i> Username: </span>  {{  users.username }} </p>
+        <hr class="my-4">
+        <p><span><i class="fa fa-group"></i> Role: </span> {{ users.role }} </p>
+        <hr class="my-4">
+        <p><span><i class="fa fa-database"></i> Description: </span> {{ users.description }} </p>
+    </div>
+    </div>    
+  </div>
+  <hr class="my-4">
+</div>

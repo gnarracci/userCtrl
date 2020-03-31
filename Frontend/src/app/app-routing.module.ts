@@ -11,6 +11,7 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { RegisterComponent } from './components/register/register.component';
 import { UserformComponent } from './components/userform/userform.component';
 import { MiscComponent } from './components/misc/misc.component';
+import { UserlistComponent } from './components/userlist/userlist.component';
 
 
 const routes: Routes = [
@@ -22,6 +23,7 @@ const routes: Routes = [
   {path: 'user/add', component: UserformComponent, canActivate: [AuthGuard]},
   {path: 'user/edit/:id', component: UserformComponent, canActivate: [AuthGuard]},
   {path: 'misc', component: MiscComponent, canActivate: [AuthGuard]},
+  {path: 'userlist', component: UserlistComponent, canActivate: [AuthGuard]},
   {path: '**', component: NotfoundComponent}
 ];
 

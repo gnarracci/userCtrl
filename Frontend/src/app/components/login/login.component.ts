@@ -27,7 +27,7 @@ export class LoginComponent implements OnInit {
           icon: 'success',
           title: 'Login Successfull!',
           showConfirmButton: false,
-          timer: 2000
+          timer: 2500
         })
         console.log(res);
         localStorage.setItem('token', res.token);

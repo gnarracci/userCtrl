@@ -7,11 +7,11 @@ const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const SECRET_KEY = "secret_user_ctrl";
 exports.TokenValidation = (req, res, next) => {
     const token = req.header('Authorization');
-    if (!token || token === null) {
-        return res.status(401).json({ message: 'Access Denied!' });
-    }
+    if (!token || token === null)
+        return res.status(403).json({ message: 'Access Denied!' });
     const payload = jsonwebtoken_1.default.verify(token, SECRET_KEY);
     req.userId = payload.id;
+    console.log(payload.id, payload.iat, payload.exp);
     next();
 };
 //# sourceMappingURL=validateToken.js.map

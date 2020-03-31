@@ -19,6 +19,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { UserformComponent } from './components/userform/userform.component';
 import { MiscComponent } from './components/misc/misc.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { UserlistComponent } from './components/userlist/userlist.component';
 
 
 @NgModule({
@@ -32,7 +33,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     DashboardComponent,
     ProfileComponent,
     UserformComponent,
-    MiscComponent
+    MiscComponent,
+    UserlistComponent
   ],
   imports: [
     BrowserModule,

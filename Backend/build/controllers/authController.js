@@ -24,7 +24,7 @@ class AuthControllers {
                     username: req.body.username,
                     password: req.body.password
                 };
-                const expireIn = 60 * 60 * 4; //14400 ms = 4 hrs
+                const expireIn = 60 * 60 * 5; // 18000 ms = 5 hrs
                 const search = yield database_1.default.query("SELECT * FROM users WHERE username = ?", [userData.username]);
                 if (search.length > 0) { /*console.log(search[0].username);*/ }
                 else {
@@ -48,9 +48,8 @@ class AuthControllers {
     profile(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const userData = yield database_1.default.query("SELECT * FROM users WHERE id = ?", [req.userId]);
-            if (userData.length > 0) {
-                res.status(200).json(userData[0]);
-            }
+            if (userData.length > 0)
+                return res.status(200).json(userData[0]);
         });
     }
 }
