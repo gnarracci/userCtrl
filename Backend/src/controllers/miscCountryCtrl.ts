@@ -6,7 +6,7 @@ class miscCountryCtrl {
 
     // Countries
 
-    public async viewCounties (req: Request, res: Response) {
+    public async viewCountries (req: Request, res: Response) {
         const countries = await pool.query("SELECT * FROM country");
         res.status(200).json(countries);
     }

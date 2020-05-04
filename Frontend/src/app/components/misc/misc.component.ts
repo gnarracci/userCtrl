@@ -198,7 +198,6 @@ export class MiscComponent implements OnInit {
 
   updateCountry(ctry: Country) {
     this.country = ctry;
-    console.log(ctry.id);
   }
 
 }

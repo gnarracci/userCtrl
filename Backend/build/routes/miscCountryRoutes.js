@@ -9,7 +9,7 @@ class MiscCounRoutes {
         this.config();
     }
     config() {
-        this.router.get('/', validateToken_1.TokenValidation, miscCountryCtrl_1.miscCountryCtrls.viewCounties);
+        this.router.get('/', miscCountryCtrl_1.miscCountryCtrls.viewCountries);
         this.router.get('/:id', validateToken_1.TokenValidation, miscCountryCtrl_1.miscCountryCtrls.getCountry);
         this.router.post('/', validateToken_1.TokenValidation, miscCountryCtrl_1.miscCountryCtrls.addCountry);
         this.router.put('/:id', validateToken_1.TokenValidation, miscCountryCtrl_1.miscCountryCtrls.updateCountry);

@@ -1,6 +1,8 @@
 <div class="row">
   <div class="col-md-12 mt-3 mb-2 text-right">
     <span><i class="fa fa-user"> Logged as:</i> {{ userlogged.fullname }} </span>
+    <br>
+    <span><i class="fa fa-adn"> your role is: </i> {{ userlogged.role }} </span>
   </div>
 </div>
 <div class="row">
@@ -19,7 +21,7 @@
         {{ user.fullname }}
         <button class="btn-danger" (click)="deleteUser(user.id)"><i class="fa fa-trash"></i></button>
       </div>
-      <img [src]="user.image" class="card-img-top mt-2">
+      <img [src]="user.image" class="card-img-top mt-1">
       <div class="card-body">
         <p> <span>User Description: </span> {{ user.description }} </p>
         <p> <span>User Role: </span> {{ user.role }} </p>

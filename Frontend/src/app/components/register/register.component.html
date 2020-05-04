@@ -1,10 +1,10 @@
 <div class="jumbotron mt-5 mx-auto">
-  <h1 class="display-5"><i class="fa fa-registered"> User Register</i></h1>
+  <h1 class="display-5"><i class="fa fa-registered"></i>  User Register</h1>
   <p class="lead"><i class="fa fa-info-circle"></i>  Fill form and Register your User in the System.</p>
   <div class="row">
     <div class="col-md-6 mt-3 mb-3">
       <div class="card">
-        <div class="card-header"><i class="fa fa-arrow-circle-down"></i> Register </div>
+        <div class="card-header"><i class="fa fa-arrow-circle-down"></i> User Register</div>
           <div class="card-body">
             <form action="">
               <div class="form-group">
@@ -33,13 +33,9 @@
               </div>
               <div class="form-group">
                 <label for="country">Country</label>
-                <select name="country" [(ngModel)]="user.country" class="form-control" required>
-                  <option value=""> -- Choose your Country -- </option>
-                  <option value="France">France</option>
-                  <option value="Italy">Italy</option>
-                  <option value="Iceland">Iceland</option>
-                  <option value="Japan">Japan</option>
-                  <option value="Venezuela">Venezuela</option>
+                <select name="country" class="form-control" [(ngModel)]="user.country" required>
+                  <option [ngValue]=null disabled> -- Choose your Country -- </option>
+                  <option [ngValue]="country" *ngFor="let country of listCountries"> {{ country.country }} </option>
                 </select>
               </div>
               <div class="form-group">
@@ -64,6 +60,6 @@
         <p><span>Description: </span> {{ user.description == '' ? 'User Description' : user.description }} </p>
         <p><span>Register Date: </span> {{ user.created_at | date: 'yyyy-MM-dd' }} </p>
       </div>
-    </div>  
+    </div>
   </div>  
 </div>

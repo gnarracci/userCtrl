@@ -15,7 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const database_1 = __importDefault(require("../database"));
 class miscCountryCtrl {
     // Countries
-    viewCounties(req, res) {
+    viewCountries(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const countries = yield database_1.default.query("SELECT * FROM country");
             res.status(200).json(countries);

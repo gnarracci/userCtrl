@@ -1,12 +1,14 @@
 <div class="row">
     <div class="col-md-12 mt-3 mb-2 text-right">
       <span><i class="fa fa-user"> Logged as:</i> {{ userlogged.fullname }} </span>
+      <br>
+      <span><i class="fa fa-adn"> your role is: </i> {{ userlogged.role }} </span>
     </div>
 </div>
 <div class="jumbotron mt3 mx-auto">
     <hr class="my-4">
-    <h1 class="display-5"><i class="fa fa-user-circle-o"></i> Add New User </h1>
-    <p class="lead"><i class="fa fa-info-circle"></i> In this page only Administrator Role can Add/Edit User Data.</p>
+    <h1 class="display-5"><i class="fa fa-user-circle-o"></i> Add / Edit User </h1>
+    <p class="lead"><i class="fa fa-info-circle"></i> In this page only SUPERUSER & Administrator Role can Add/Edit User Data.</p>
     <div class="row">
         <div class="col-md-6 mt-3">
             <div class="card">
@@ -22,12 +24,7 @@
                             <input type="text" name="username" id="username" class="form-control" [(ngModel)]="user.username" placeholder="username" required>
                         </div>
                         <div class="form-group">
-                            <label for="password">Password</label>
-                            <input type="password" name="password" id="password" class="form-control" placeholder="password" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="repassword">Repeat Password</label>
-                            <input type="password" name="repassword" id="repassword" class="form-control" placeholder="repeat password" required>
+                            <button class="btn btn-primary btn-lg btn-block" (click)="showModal=true" data-toggle="modal" data-target="#mymodal"><i class="fa fa-code"></i> Set / Edit Password</button>
                         </div>
                         <div class="form-group">
                             <label for="email">Email</label>
@@ -39,22 +36,16 @@
                         </div>
                         <div class="form-group">
                             <label for="role">User Role</label>
-                            <select name="role" name="role" class="form-control" [(ngModel)]="user.role" required>
-                              <option value=""> -- Choose Role -- </option>
-                              <option value="ADMINISTRATOR">Administrator</option>
-                              <option value="OBSERVER">Observer</option>
-                              <option value="USER">User</option>
+                            <select name="role" id="role" class="form-control" [(ngModel)]="user.role" required>
+                              <option [ngValue]=null disabled> -- Choose UserRole -- </option>
+                              <option [ngValue]="role" *ngFor="let role of listRoles"> {{role.role}} </option>
                             </select>
                         </div>
                         <div class="form-group">
                             <label for="country">Country</label>
-                            <select name="country" name="country" class="form-control" [(ngModel)]="user.country" required>
-                              <option value=""> -- Choose a Country -- </option>
-                              <option value="France">France</option>
-                              <option value="Italy">Italy</option>
-                              <option value="Iceland">Iceland</option>
-                              <option value="Japan">Japan</option>
-                              <option value="Venezuela">Venezuela</option>
+                            <select name="country" id="country" class="form-control" [(ngModel)]="user.country" required>
+                                <option [ngValue]=null disabled> -- Choose User Origin Country -- </option>
+                                <option [ngValue]="country" *ngFor="let country of listCountries"> {{country.country}} </option>
                             </select>
                         </div>
                         <div class="form-group">
@@ -82,6 +73,35 @@
                 <hr>
             </div>
         </div>
+
+        <div class="modal" id="mymodal" [ngClass]="{'show': showModal}">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title">Set User Password</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <form>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" name="password" id="password" class="form-control" placeholder="password">
+                    </div>
+                    <div class="form-group">
+                        <label for="repassword">ReType Password</label>
+                        <input type="password" name="repassword" id="repassword" class="form-control" placeholder="re-type password">
+                    </div>
+                    <hr class="my4">
+                    <button type="submit" class="btn btn-primary btn-block btn-lg" (click)="setNewPassword()" ><i class="fa fa-user-secret"></i> Set New Password</button>
+                    <button class="btn btn-secondary btn-block btn-lg" data-dismiss="modal"><i class="fa fa-close"></i> Close</button>
+                  </form>
+                </div>               
+              </div>
+            </div>
+        </div>
+
     </div>
     <hr class="my-4">    
 </div>

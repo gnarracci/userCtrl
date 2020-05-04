@@ -54,16 +54,17 @@ class UserControllers {
             const updateUser = {
                 fullname: req.body.fullname,
                 username: req.body.username,
-                password: req.body.password,
+                //password: req.body.password,
                 email: req.body.email,
                 image: req.body.image,
                 role: req.body.role,
                 country: req.body.country,
                 description: req.body.description
             };
-            updateUser.password = yield helpers_1.hashUser.encryptPassword(updateUser.password);
-            yield database_1.default.query('UPDATE users SET ? WHERE id = ?', [updateUser, id]);
-            res.json({ message: 'The User was Updated!' });
+            console.log(updateUser);
+            //updateUser.password = await hashUser.encryptPassword(updateUser.password);
+            /*await pool.query('UPDATE users SET ? WHERE id = ?', [updateUser, id]);
+            res.json({message: 'The User was Updated!'});*/
         });
     }
     delete(req, res) {

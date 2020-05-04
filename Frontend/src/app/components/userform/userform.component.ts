@@ -4,8 +4,6 @@ import Swal from 'sweetalert2';
 
 import { User } from './../../models/users';
 import { AuthService } from '../../services/auth.service';
-import { Role } from './../../models/role';
-import { Country } from './../../models/country';
 
 @Component({
   selector: 'app-userform',
@@ -17,6 +15,7 @@ export class UserformComponent implements OnInit {
 
   user: User = {
     id: 0,
+    fullname: '',
     username: '',
     password: '',
     email: '',
@@ -27,16 +26,9 @@ export class UserformComponent implements OnInit {
     created_at: new Date()
   };
 
-  listRoles: Role = {
-    id: 0,
-    role: '',
-    role_descrip: ''
-  }
+  listRoles: any = [];
 
-  listCountries: Country = {
-    id: 0,
-    country: ''
-  }
+  listCountries: any = [];
 
   edit = false;
 
@@ -100,6 +92,7 @@ export class UserformComponent implements OnInit {
   }
 
   updateUser() {
+    console.log("User Sended",this.user.role);
     delete this.user.created_at;
     this.authService.updateUser(this.user.id, this.user).subscribe(
       res => {
@@ -117,10 +110,15 @@ export class UserformComponent implements OnInit {
     );
   }
 
+  setNewPassword() {
+    
+  }
+
   dataUser() {
     this.authService.dataUser().subscribe(
       res => {
         this.userlogged = res;
+        console.log(res);
       },
       err => console.log(err)
     );

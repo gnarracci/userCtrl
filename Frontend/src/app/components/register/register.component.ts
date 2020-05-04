@@ -24,9 +24,12 @@ export class RegisterComponent implements OnInit {
     created_at: new Date()
   };
 
+  listCountries: any = [];
+
   constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit() {
+    this.listCountry();
   }
 
   saveNewUser() {
@@ -44,6 +47,16 @@ export class RegisterComponent implements OnInit {
         this.router.navigate(['/profile']);
       },
       err => Swal.fire('Error!', 'Something went wrong!', 'error')
+    );
+  }
+
+  listCountry(): any {
+    this.authService.viewCountries().subscribe(
+      res => {
+        this.listCountries = res;
+        console.log(res);
+      },
+      err => console.error(err)
     );
   }
 

@@ -20,15 +20,15 @@
       </li>
       </ng-container>
       <ng-template #loggedIn>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/dashboard" routerLinkActive="active"><i class="fa fa-arrow-circle-down"></i> Dashboard </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/profile" routerLinkActive="active"><i class="fa fa-arrow-circle-down"></i> Profile </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" (click)="authService.logOut()"><i class="fa fa-arrow-circle-left"></i> LogOut </a>
-        </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/dashboard" routerLinkActive="active"><i class="fa fa-arrow-circle-down"></i> Dashboard </a>
+          </li>         
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/profile" routerLinkActive="active"><i class="fa fa-arrow-circle-down"></i> Profile </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" (click)="authService.logOut()"><i class="fa fa-arrow-circle-left"></i> LogOut </a>
+          </li>        
       </ng-template>
     </ul>
   </div>

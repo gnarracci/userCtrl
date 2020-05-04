@@ -11,9 +11,12 @@ export class NavbarComponent implements OnInit {
 
   constructor(public authService: AuthService) { }
 
-  // tslint:disable-next-line: variable-name
   public app_name = 'userCtrl';
 
-  ngOnInit() { }
+  userlogged: any  = [];
+
+  ngOnInit() {
+  }
+
 
 }

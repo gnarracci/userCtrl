@@ -17,19 +17,20 @@ const helpers_1 = require("./../helpers");
 class RegisterControllers {
     register(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
+            const country = req.body.country; // Object Country with all data
             const newUser = {
                 fullname: req.body.fullname,
                 username: req.body.username,
                 password: req.body.password,
                 email: req.body.email,
                 image: req.body.image,
+                country: country.country,
                 role: req.body.role,
-                country: req.body.country,
                 description: req.body.description
             };
             newUser.password = yield helpers_1.hashUser.encryptPassword(newUser.password);
             const result = yield database_1.default.query('INSERT INTO users SET  ?', [newUser]);
-            res.json({ message: 'User was Registered!' });
+            res.status(200).json({ message: 'User was Registered!' });
         });
     }
 }
